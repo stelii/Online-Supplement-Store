@@ -11,6 +11,7 @@ public class OrdersDB {
     private static String filepath = System.getProperty("user.home") + System.getProperty("file.separator") + DB_NAME;
     public static final String CONNECTION_STRING = "jdbc:sqlite:" + filepath;
 
+    public static final String COLUMN_CUSTOMER_NAME = "customer_name";
     public static final String COLUMN_NAME = "name";
     public static final String COLUMN_PRICE = "price";
     public static final String COLUMN_QUANTITY = "quantity";
@@ -18,7 +19,8 @@ public class OrdersDB {
 
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
             " (" + COLUMN_NAME + " TEXT," + COLUMN_PRICE + " REAL," + COLUMN_QUANTITY + " INTEGER," +
-            COLUMN_DELIVERY_STATUS + " TEXT)";
+            COLUMN_DELIVERY_STATUS + " TEXT," + COLUMN_CUSTOMER_NAME + " TEXT" +
+            ")";
 
     private Connection connection;
 
