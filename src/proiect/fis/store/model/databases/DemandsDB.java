@@ -5,39 +5,41 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class StockDB {
-    public static final String TABLE_NAME = "stock";
+public class DemandsDB {
     public static final String DB_NAME = "store.db";
     private static String filepath = System.getProperty("user.home") + System.getProperty("file.separator") + DB_NAME;
     public static final String CONNECTION_STRING = "jdbc:sqlite:" + filepath;
-
+    public static final String TABLE_NAME = "Demands";
     private Connection connection;
-    private static StockDB instance = new StockDB();
 
-    private StockDB() {
+    public static DemandsDB instance = new DemandsDB();
+
+    private DemandsDB() {
     }
 
-    public static StockDB getInstance() {
+    public static DemandsDB getInstance() {
         return instance;
     }
 
-    public void openConnection() {
-
+    public boolean openConnection() {
         try {
             connection = DriverManager.getConnection(CONNECTION_STRING);
             Statement statement = connection.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS" + DB_NAME +
-                    " (name TEXT, price REAL, quantity INTEGER, delivery TEXT);");
+            statement.execute("CREATE TABLE IF NOT EXISTS" + DB_NAME + " (name TEXT, price REAL, quantity INTEGER);");
+            return true;
         } catch (SQLException e) {
             System.out.println("create table error");
+            return false;
         }
     }
 
-    public void closeConnection() {
+    public boolean closeConnection() {
         try {
-            connection.close();
+            if(connection != null)
+                connection.close();
+            return true;
         } catch (SQLException e) {
-            //
+            return false;
         }
     }
 }
