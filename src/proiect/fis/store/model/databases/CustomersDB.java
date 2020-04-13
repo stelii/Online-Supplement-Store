@@ -20,6 +20,7 @@ public class CustomersDB {
     public static final String COLUMN_ADDRESS = "addres";
     public static final String COLUMN_PASSWORD_STATUS = "password_changed";
 
+
     public static final String CREATE_TABLE = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
             "(" + COLUMN_USERNAME + " TEXT, " +
             COLUMN_NAME + " TEXT," + COLUMN_PASSWORD + " TEXT," + COLUMN_PASSWORD_STATUS + " INTEGER DEFAULT 0," +
