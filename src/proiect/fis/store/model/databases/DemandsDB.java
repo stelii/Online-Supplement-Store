@@ -33,13 +33,13 @@ public class DemandsDB {
         }
     }
 
-    public boolean closeConnection() {
+    public void closeConnection() {
         try {
             if(connection != null)
                 connection.close();
-            return true;
+
         } catch (SQLException e) {
-            return false;
+            //
         }
     }
 }
