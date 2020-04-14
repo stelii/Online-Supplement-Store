@@ -15,6 +15,7 @@ public class DemandsDB {
     public static DemandsDB instance = new DemandsDB();
 
     private DemandsDB() {
+
     }
 
     public static DemandsDB getInstance() {
