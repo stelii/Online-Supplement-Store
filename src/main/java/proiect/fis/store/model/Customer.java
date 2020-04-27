@@ -9,6 +9,6 @@ public class Customer {
     private String address ;
     private int password_changed ;
 
-    public Customer(String username,String )
+
 
 }

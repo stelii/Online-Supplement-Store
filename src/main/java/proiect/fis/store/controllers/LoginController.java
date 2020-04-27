@@ -56,10 +56,10 @@ public class LoginController {
                     loader.setControllerFactory(new Callback<Class<?>, Object>() {
                         @Override
                         public Object call(Class<?> param) {
-                            if(param == CustomerController.class){
-                                CustomerController customerController = new CustomerController();
-                                customerController.setCustomer(customerFound);
-                                return customerController;
+                            if(param == SupplierController.class){
+                                SupplierController supplierController = new SupplierController();
+                                supplierController.setSupplier(supplierFound);
+                                return supplierController;
                             }else{
                                 try{
                                     return param.newInstance();
@@ -79,6 +79,37 @@ public class LoginController {
                     return false;
                 }
             }
+
+            //if the password is already changed
+            try {
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/change_password_page.fxml"));
+                loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                    @Override
+                    public Object call(Class<?> param) {
+                        if(param == ChangePassController.class){
+                            ChangePassController changePassController = new ChangePassController();
+                            changePassController.initData(customerFound);
+                            return changePassController;
+                        }else{
+                            try{
+                                return param.newInstance();
+                            }catch (Exception e){
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                });
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                return true;
+            } catch (IOException e) {
+                //
+                return false;
+            }
+        }
         }
 
         Customer customerFound;

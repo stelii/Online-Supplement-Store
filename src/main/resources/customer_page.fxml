@@ -12,4 +12,5 @@
    <children>
       <Label text="Welcome to customer page"/>
    </children>
+
 </VBox>
