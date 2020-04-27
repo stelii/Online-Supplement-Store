@@ -1,5 +1,8 @@
 package proiect.fis.store.model.databases;
 
+import proiect.fis.store.model.Customer;
+import proiect.fis.store.model.Supplier;
+
 import java.sql.*;
 
 public class SupplierDB {
@@ -22,6 +25,9 @@ public class SupplierDB {
     public static final String INSERT_SUPPLIER = "INSERT OR IGNORE INTO " + TABLE_NAME + " (" +
             "username" + "," + "name" + "," + "password" + ")" +
             " VALUES " + "(?,?,?)";
+
+    public static final String SEARCH_SUPPLIER = "SELECT *" + " FROM " + TABLE_NAME + " WHERE " +
+            COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + "= ?";
 
     private Connection connection;
     private PreparedStatement insertSupplier ;
@@ -76,6 +82,30 @@ public class SupplierDB {
             }
         }
     }
+
+    public Supplier searchSupplier(String username, String encryptedPassword) {
+        Supplier supplier = null;
+
+        try (PreparedStatement searchCustomer = connection.prepareStatement(SEARCH_SUPPLIER)) {
+
+            searchCustomer.setString(1, username);
+            searchCustomer.setString(2, encryptedPassword);
+
+            ResultSet resultSet = searchCustomer.executeQuery();
+
+            if (resultSet.next()) {
+                String name = resultSet.getString(COLUMN_NAME);
+                int password_changed = resultSet.getInt(COLUMN_PASSWORD_STATUS);
+                supplier = new Supplier(username, name, encryptedPassword, password_changed);
+            }
+            return supplier;
+        } catch (SQLException e) {
+            System.out.println("Couldn't connect to database " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
 
 
 
