@@ -8,6 +8,7 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import proiect.fis.store.model.HashPassword;
 import proiect.fis.store.model.databases.CustomersDB;
+import proiect.fis.store.model.databases.SupplierDB;
 
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -63,9 +64,24 @@ public class RegisterController {
             }
         }
 
+        if(roleChoice.getValue().toString().equals("Supplier")){
+            SupplierDB supplierDB = SupplierDB.getInstance();
+
+            if(supplierDB.add(username,name,hashedPassword)){
+                Alert alert = new Alert(Alert.AlertType.NONE,"You have successfully registered",ButtonType.OK);
+                TextArea textField = new TextArea("YOUR PASSWORD IS: \n" + generatedPass);
+                textField.setWrapText(true);
+                textField.setEditable(false);
+                alert.getDialogPane().setContent(textField);
 
 
-
+                alert.showAndWait();
+                if(alert.getResult() == ButtonType.OK){
+                    alert.close();
+                }
+                return true ;
+            }
+        }
         Alert alert = new Alert(Alert.AlertType.WARNING,"This account already exists", ButtonType.OK);
         alert.showAndWait();
         if(alert.getResult() == ButtonType.OK){
@@ -92,11 +108,8 @@ public class RegisterController {
     private void setButtonProperties(){
         String username = usernameInput.getText();
         String name = nameInput.getText();
-//        String pass = passwordInput.getText();
         boolean isDisabled = username.isEmpty() || username.trim().isEmpty() ||
                 name.isEmpty() || name.trim().isEmpty();
-//                            || pass.isEmpty() || pass.trim().isEmpty();
-
         registerButton.setDisable(isDisabled);
     }
 

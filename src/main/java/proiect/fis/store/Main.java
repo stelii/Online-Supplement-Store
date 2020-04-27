@@ -5,15 +5,32 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import proiect.fis.store.model.databases.CustomersDB;
+import proiect.fis.store.model.databases.SupplierDB;
+
+import java.sql.SQLException;
 
 public class Main extends Application {
+
+    @Override
+    public void init() throws Exception {
+        openDatabases();
+        super.init();
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("/sample.fxml"));
         primaryStage.setTitle("Hello World");
-        primaryStage.setScene(new Scene(root, 300, 275));
+        primaryStage.setScene(new Scene(root));
         primaryStage.show();
+    }
+
+    private void openDatabases() {
+        CustomersDB customersDB = CustomersDB.getInstance();
+        customersDB.open();
+        SupplierDB supplierDB = SupplierDB.getInstance();
+        supplierDB.openConnection();
     }
 
 
