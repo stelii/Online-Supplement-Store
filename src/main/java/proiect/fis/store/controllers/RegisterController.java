@@ -8,6 +8,8 @@ import javafx.scene.control.*;
 import javafx.stage.Stage;
 import proiect.fis.store.model.DataSource;
 import proiect.fis.store.model.EncryptPassword;
+import proiect.fis.store.model.HashPassword;
+import proiect.fis.store.model.databases.CustomersDB;
 
 import java.io.IOException;
 import java.security.SecureRandom;
@@ -33,13 +35,13 @@ public class RegisterController {
 
     @FXML
     public boolean register(){
-        DataSource dataSource = DataSource.getInstance();
+        CustomersDB dataSource = CustomersDB.getInstance();
 
         String username = usernameInput.getText().trim();
         String name = nameInput.getText().trim();
 //        String pass = passwordInput.getText();
         String generatedPass = generateRandomPassword();
-        String hashedPassword = EncryptPassword.encrypt(generatedPass);
+        String hashedPassword = HashPassword.encrypt(generatedPass);
         System.out.println("Generated password: " + generatedPass);
 
         //clear input data
