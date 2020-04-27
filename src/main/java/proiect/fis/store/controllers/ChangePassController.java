@@ -8,8 +8,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import proiect.fis.store.model.Customer;
-import proiect.fis.store.model.DataSource;
-import proiect.fis.store.model.EncryptPassword;
 import proiect.fis.store.model.Supplier;
 
 import java.io.IOException;
@@ -31,6 +29,9 @@ public class ChangePassController {
 
     public void setSupplier(Supplier supplier){
         this.supplier = supplier;
+    }
+    public void setCustomer(Customer customer){
+        this.customer = customer;
     }
 
 
