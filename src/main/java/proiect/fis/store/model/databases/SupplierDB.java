@@ -108,7 +108,6 @@ public class SupplierDB {
 
 
 
-
     public void closeConnection () {
         try {
             if (connection!=null)

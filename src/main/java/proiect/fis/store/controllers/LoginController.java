@@ -48,7 +48,37 @@ public class LoginController {
         if(checkButton.isSelected()){
             SupplierDB supplierDB = SupplierDB.getInstance();
 
-            if()
+           Supplier supplierFound = supplierDB.searchSupplier(username,hashedPassword);
+            if (supplierFound.getPassword_changed() != 0) {
+                try {
+                    Stage stage = (Stage) loginButton.getScene().getWindow();
+                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/supplier_page.fxml"));
+                    loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                        @Override
+                        public Object call(Class<?> param) {
+                            if(param == CustomerController.class){
+                                CustomerController customerController = new CustomerController();
+                                customerController.setCustomer(customerFound);
+                                return customerController;
+                            }else{
+                                try{
+                                    return param.newInstance();
+                                }catch (Exception e){
+                                    throw new RuntimeException(e);
+                                }
+                            }
+                        }
+                    });
+                    Parent root = loader.load();
+                    Scene scene = new Scene(root);
+                    stage.setScene(scene);
+                    stage.show();
+                    return true;
+                } catch (IOException e) {
+                    //
+                    return false;
+                }
+            }
         }
 
         Customer customerFound;
