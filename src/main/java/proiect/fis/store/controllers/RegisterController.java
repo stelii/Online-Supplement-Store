@@ -6,8 +6,6 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
-import proiect.fis.store.model.DataSource;
-import proiect.fis.store.model.EncryptPassword;
 import proiect.fis.store.model.HashPassword;
 import proiect.fis.store.model.databases.CustomersDB;
 
@@ -23,11 +21,12 @@ public class RegisterController {
     @FXML
     private TextField nameInput ;
     @FXML
-    private PasswordField passwordInput ;
+    private ComboBox roleChoice;
     @FXML
     private Button toLoginBtn;
 
     public void initialize(){
+        roleChoice.getItems().addAll("Customer","Supplier");
         registerButton.setDisable(true);
     }
 
@@ -35,36 +34,37 @@ public class RegisterController {
 
     @FXML
     public boolean register(){
-        CustomersDB dataSource = CustomersDB.getInstance();
-
         String username = usernameInput.getText().trim();
         String name = nameInput.getText().trim();
-//        String pass = passwordInput.getText();
         String generatedPass = generateRandomPassword();
         String hashedPassword = HashPassword.encrypt(generatedPass);
-        System.out.println("Generated password: " + generatedPass);
 
         //clear input data
         usernameInput.clear();
         nameInput.clear();
-//        passwordInput.clear();
         //clear input data
 
-        if(dataSource.add(username,name,hashedPassword)){
-            Alert alert = new Alert(Alert.AlertType.NONE,"You have successfully registered",ButtonType.OK);
-            TextArea textField = new TextArea("YOUR PASSWORD IS: \n" + generatedPass);
-            textField.setWrapText(true);
-            textField.setEditable(false);
-            alert.getDialogPane().setContent(textField);
+        if(roleChoice.getValue().toString().equals("Customer")){
+            CustomersDB customersDB = CustomersDB.getInstance();
+
+            if(customersDB.add(username,name,hashedPassword)){
+                Alert alert = new Alert(Alert.AlertType.NONE,"You have successfully registered",ButtonType.OK);
+                TextArea textField = new TextArea("YOUR PASSWORD IS: \n" + generatedPass);
+                textField.setWrapText(true);
+                textField.setEditable(false);
+                alert.getDialogPane().setContent(textField);
 
 
-            alert.showAndWait();
-            if(alert.getResult() == ButtonType.OK){
-                alert.close();
+                alert.showAndWait();
+                if(alert.getResult() == ButtonType.OK){
+                    alert.close();
+                }
+                return true ;
             }
-//            System.out.println("Customer registered successfully");
-            return true ;
         }
+
+
+
 
         Alert alert = new Alert(Alert.AlertType.WARNING,"This account already exists", ButtonType.OK);
         alert.showAndWait();

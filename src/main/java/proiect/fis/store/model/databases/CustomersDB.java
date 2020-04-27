@@ -1,9 +1,6 @@
 package proiect.fis.store.model.databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 
 public class CustomersDB {
 
@@ -28,8 +25,12 @@ public class CustomersDB {
             COLUMN_ADDRESS + " TEXT," +
             "UNIQUE " + "(" + COLUMN_USERNAME + ")" + ")";
 
-    private Connection connection;
+    public static final String INSERT_CUSTOMER = "INSERT OR IGNORE INTO " + TABLE_NAME + " (" +
+            COLUMN_USERNAME + "," + COLUMN_NAME + "," + COLUMN_PASSWORD + ")" +
+            " VALUES " + "(?,?,?)";
 
+    private Connection connection;
+    private PreparedStatement insertCustomer ;
     private static CustomersDB instance = new CustomersDB();
 
     private CustomersDB() {
@@ -50,6 +51,40 @@ public class CustomersDB {
             return false;
         }
     }
+
+    public boolean add(String username, String name, String password) {
+        try {
+            try {
+                if (connection == null) {
+                    connection = DriverManager.getConnection(CONNECTION_STRING);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error connecting to database " + e.getMessage());
+                e.printStackTrace();
+                return false;
+            }
+            insertCustomer = connection.prepareStatement(INSERT_CUSTOMER);
+            insertCustomer.setString(1, username);
+            insertCustomer.setString(2, name);
+            insertCustomer.setString(3, password);
+            int x = insertCustomer.executeUpdate();
+            return x > 0;
+        } catch (SQLException e) {
+            System.out.println("Failed to register the customer " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if(insertCustomer != null)
+                    insertCustomer.close();
+            } catch (SQLException e) {
+                System.out.println("Couldn't close the connection for this prepared statement " + e.getMessage());
+            }
+        }
+    }
+
+
+
 
     public boolean close(){
         try{
