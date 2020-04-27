@@ -10,6 +10,7 @@ import javafx.util.Callback;
 import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.HashPassword;
 import proiect.fis.store.model.Supplier;
+import proiect.fis.store.model.databases.CustomersDB;
 import proiect.fis.store.model.databases.SupplierDB;
 
 import java.io.IOException;
@@ -44,6 +45,9 @@ public class LoginController {
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText().trim();
         String hashedPassword = HashPassword.encrypt(password);
+
+        usernameInput.clear();
+        passwordInput.clear();
 
         if(checkButton.isSelected()){
             SupplierDB supplierDB = SupplierDB.getInstance();
@@ -80,7 +84,7 @@ public class LoginController {
                 }
             }
 
-            //if the password is already changed
+            //if the password is not changed
             try {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/change_password_page.fxml"));
@@ -89,7 +93,7 @@ public class LoginController {
                     public Object call(Class<?> param) {
                         if(param == ChangePassController.class){
                             ChangePassController changePassController = new ChangePassController();
-                            changePassController.initData(customerFound);
+                            changePassController.setSupplier(supplierFound);
                             return changePassController;
                         }else{
                             try{
@@ -110,45 +114,25 @@ public class LoginController {
                 return false;
             }
         }
-        }
-
         Customer customerFound;
-        DataSource dataSource = DataSource.getInstance();
+        CustomersDB customersDB = CustomersDB.getInstance();
+
+//        if(username.equals("manager") && password.equals("passwordManager")){
+//            try{
+//                Stage stage = (Stage) loginButton.getScene().getWindow();
+//                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/manager_page.fxml"));
+//                Parent root = loader.load();
+//                Scene scene = new Scene(root);
+//                stage.setScene(scene);
+//                stage.show();
+//                return true ;
+//            }catch (IOException e){
+//
+//            }
+//        }
 
 
-
-        usernameInput.clear();
-        passwordInput.clear();
-
-        if(username.equals("manager") && password.equals("passwordManager")){
-            try{
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/manager_page.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                return true ;
-            }catch (IOException e){
-
-            }
-        }
-
-        if(username.equals("supplier") && password.equals("passwordSupplier")){
-            try{
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/supplier_page.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                return true ;
-            }catch (IOException e){
-
-            }
-        }
-
-        customerFound = dataSource.searchCustomer(username, encryptedPassword);
+        customerFound = customersDB.searchCustomer(username, encryptedPassword);
 
         //daca am gasit customerul
         if (customerFound != null) {

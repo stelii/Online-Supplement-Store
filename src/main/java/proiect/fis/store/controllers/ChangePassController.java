@@ -10,6 +10,7 @@ import javafx.stage.Stage;
 import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.DataSource;
 import proiect.fis.store.model.EncryptPassword;
+import proiect.fis.store.model.Supplier;
 
 import java.io.IOException;
 
@@ -22,14 +23,14 @@ public class ChangePassController {
     private PasswordField passwordInput;
 
     private Customer customer ;
+    private Supplier supplier;
 
     public void initialize(){
-//        System.out.println("From initialize method: " + customer.getName());
         backToMainPage.setDisable(true);
     }
 
-    public void initData(Customer customer){
-        this.customer = customer ;
+    public void setSupplier(Supplier supplier){
+        this.supplier = supplier;
     }
 
 
@@ -47,21 +48,21 @@ public class ChangePassController {
         }
     }
 
-    public void changePassword(){
-        DataSource dataSource = DataSource.getInstance();
-        String username = customer.getUsername();
-        String password = passwordInput.getText();
-        System.out.println("new password: " + password);
-
-        passwordInput.clear();
-
-        String hashedPassword = EncryptPassword.encrypt(password);
-        if(dataSource.updatePassword(username,hashedPassword)){
-            backToMainPage.setDisable(false);
-            return ;
-        }
-
-        System.out.println("i didn't succeed");
-    }
+//    public void changePassword(){
+//        DataSource dataSource = DataSource.getInstance();
+//        String username = customer.getUsername();
+//        String password = passwordInput.getText();
+//        System.out.println("new password: " + password);
+//
+//        passwordInput.clear();
+//
+//        String hashedPassword = EncryptPassword.encrypt(password);
+//        if(dataSource.updatePassword(username,hashedPassword)){
+//            backToMainPage.setDisable(false);
+//            return ;
+//        }
+//
+//        System.out.println("i didn't succeed");
+//    }
 
 }
