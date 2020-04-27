@@ -94,8 +94,8 @@ public class RegisterController {
     public void switchToLogin(){
         try{
             Stage stage = (Stage) toLoginBtn.getScene().getWindow();
-            Parent loginView = FXMLLoader.load(getClass().getResource("../view/login_page.fxml"));
-            stage.setTitle("login page");
+            Parent loginView = FXMLLoader.load(getClass().getResource("/login_page.fxml"));
+            stage.setTitle("Login page");
             Scene scene = new Scene(loginView,600,400);
             stage.setScene(scene);
             stage.show();
