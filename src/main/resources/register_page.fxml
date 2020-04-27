@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="proiect.fis.store.controllers.RegisterController"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <TextField fx:id="usernameInput" layoutX="226.0" layoutY="65.0" onKeyReleased="#setButtonProperties" promptText="Username" />
+        <TextField fx:id="nameInput" layoutX="226.0" layoutY="107.0" onKeyReleased="#setButtonProperties" promptText="Name" />
+        <Button fx:id="registerButton" layoutX="271.0" layoutY="154.0" mnemonicParsing="false" onAction="#register" text="Register" />
+        <Button fx:id="toLoginBtn" layoutX="257.0" layoutY="188.0" mnemonicParsing="false" onAction="#switchToLogin" text="Back to Login" />
+        <Label layoutX="226.0" layoutY="34.0" text="The password will be generated" />
+    </children>
+
+</AnchorPane>
