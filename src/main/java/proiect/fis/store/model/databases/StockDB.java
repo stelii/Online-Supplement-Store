@@ -23,7 +23,7 @@ public class StockDB {
         try{
             connection = DriverManager.getConnection(CONNECTION_STRING);
             Statement statement = connection.createStatement();
-            statement.execute("CREATE TABLE IF NOT EXISTS " + DB_NAME + " (name TEXT,price REAL,quantity INTEGER);");
+            statement.execute("CREATE TABLE IF NOT EXISTS " + TABLE_NAME + " (name TEXT,price REAL,quantity INTEGER);");
             return true;
         }
         catch (SQLException e) {

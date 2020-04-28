@@ -1,9 +1,8 @@
 package proiect.fis.store.model.databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import proiect.fis.store.model.Customer;
+
+import java.sql.*;
 
 public class CustomersDB {
 
@@ -28,8 +27,18 @@ public class CustomersDB {
             COLUMN_ADDRESS + " TEXT," +
             "UNIQUE " + "(" + COLUMN_USERNAME + ")" + ")";
 
-    private Connection connection;
+    public static final String INSERT_CUSTOMER = "INSERT OR IGNORE INTO " + TABLE_NAME + " (" +
+            COLUMN_USERNAME + "," + COLUMN_NAME + "," + COLUMN_PASSWORD + ")" +
+            " VALUES " + "(?,?,?)";
 
+    public static final String SEARCH_CUSTOMER = "SELECT *" + " FROM " + TABLE_NAME + " WHERE " +
+            COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + "= ?";
+
+    public static final String CHANGE_PASSWOWRD_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_PASSWORD + " = ?," +
+            COLUMN_PASSWORD_STATUS + " = 1 WHERE " + COLUMN_USERNAME + "= ?";
+
+    private Connection connection;
+    private PreparedStatement insertCustomer ;
     private static CustomersDB instance = new CustomersDB();
 
     private CustomersDB() {
@@ -50,6 +59,77 @@ public class CustomersDB {
             return false;
         }
     }
+
+    public boolean add(String username, String name, String password) {
+        try {
+            try {
+                if (connection == null) {
+                    connection = DriverManager.getConnection(CONNECTION_STRING);
+                }
+            } catch (SQLException e) {
+                System.out.println("Error connecting to database " + e.getMessage());
+                e.printStackTrace();
+                return false;
+            }
+            insertCustomer = connection.prepareStatement(INSERT_CUSTOMER);
+            insertCustomer.setString(1, username);
+            insertCustomer.setString(2, name);
+            insertCustomer.setString(3, password);
+            int x = insertCustomer.executeUpdate();
+            return x > 0;
+        } catch (SQLException e) {
+            System.out.println("Failed to register the customer " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        } finally {
+            try {
+                if(insertCustomer != null)
+                    insertCustomer.close();
+            } catch (SQLException e) {
+                System.out.println("Couldn't close the connection for this prepared statement " + e.getMessage());
+            }
+        }
+    }
+
+    public Customer searchCustomer(String username, String encryptedPassword) {
+        Customer customer = null;
+
+        try (PreparedStatement searchCustomer = connection.prepareStatement(SEARCH_CUSTOMER)) {
+            searchCustomer.setString(1, username);
+            searchCustomer.setString(2, encryptedPassword);
+
+            ResultSet resultSet = searchCustomer.executeQuery();
+
+            if (resultSet.next()) {
+                String name = resultSet.getString(COLUMN_NAME);
+                int password_changed = resultSet.getInt(COLUMN_PASSWORD_STATUS);
+                customer = new Customer(username, name, encryptedPassword, password_changed);
+            }
+            return customer;
+        } catch (SQLException e) {
+            System.out.println("Couldn't connect to database " + e.getMessage());
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+
+    public boolean updatePassword(String username, String newPassword) {
+        try (PreparedStatement updatePass = connection.prepareStatement(CHANGE_PASSWOWRD_CUSTOMER)) {
+
+            updatePass.setString(1, newPassword);
+            updatePass.setString(2, username);
+            updatePass.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error on database " + e.getMessage());
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+
+
 
     public boolean close(){
         try{
