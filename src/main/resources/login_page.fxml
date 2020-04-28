@@ -12,7 +12,8 @@
       <TextField layoutX="226.0" layoutY="99.0" promptText="Username" fx:id="usernameInput"/>
       <PasswordField layoutX="226.0" layoutY="137.0" promptText="Password" fx:id="passwordInput"
                      onKeyReleased="#setButtonProperties"/>
-      <Button layoutX="289.0" layoutY="200.0" mnemonicParsing="false" text="Register here" fx:id="toRegisterBtn"/>
+      <Button layoutX="289.0" layoutY="200.0" mnemonicParsing="false" text="Register here" fx:id="toRegisterBtn"
+            onAction="#switchToRegister"/>
       <CheckBox layoutX="228.0" layoutY="171.0" mnemonicParsing="false" text="I'm a supplier" fx:id="checkButton"/>
       <Button layoutX="228.0" layoutY="200.0" mnemonicParsing="false" text="Login"
               onAction="#logIn"

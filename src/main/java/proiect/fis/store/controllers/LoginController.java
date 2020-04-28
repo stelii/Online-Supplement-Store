@@ -32,6 +32,20 @@ public class LoginController {
     }
 
     @FXML
+    public void switchToRegister() {
+        try {
+            Stage stage = (Stage) toRegisterBtn.getScene().getWindow();
+            Parent registerView = FXMLLoader.load(getClass().getResource("/register_page.fxml"));
+            stage.setTitle("Register page");
+            Scene scene = new Scene(registerView);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            //
+        }
+    }
+
+    @FXML
     public void setButtonProperties(){
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText().trim();
