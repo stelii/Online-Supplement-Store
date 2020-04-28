@@ -63,137 +63,61 @@ public class LoginController {
         usernameInput.clear();
         passwordInput.clear();
 
+        if(username.equals("manager") && password.equals("passwordManager")) {
+            return logInManager();
+        }
+
         if(checkButton.isSelected()){
             SupplierDB supplierDB = SupplierDB.getInstance();
 
            Supplier supplierFound = supplierDB.searchSupplier(username,hashedPassword);
            if(supplierFound != null){
-               if (supplierFound.getPassword_changed() != 0) {
-                   try {
-                       Stage stage = (Stage) loginButton.getScene().getWindow();
-                       FXMLLoader loader = new FXMLLoader(getClass().getResource("/supplier_page.fxml"));
-                       loader.setControllerFactory(new Callback<Class<?>, Object>() {
-                           @Override
-                           public Object call(Class<?> param) {
-                               if(param == SupplierController.class){
-                                   SupplierController supplierController = new SupplierController();
-                                   supplierController.setSupplier(supplierFound);
-                                   return supplierController;
-                               }else{
-                                   try{
-                                       return param.newInstance();
-                                   }catch (Exception e){
-                                       throw new RuntimeException(e);
-                                   }
-                               }
-                           }
-                       });
-                       Parent root = loader.load();
-                       Scene scene = new Scene(root);
-                       stage.setScene(scene);
-                       stage.show();
-                       return true;
-                   } catch (IOException e) {
-                       //
-                       return false;
-                   }
-               }
-
-               //if the password is not changed
-               try {
-                   Stage stage = (Stage) loginButton.getScene().getWindow();
-                   FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/change_password_page.fxml"));
-                   loader.setControllerFactory(new Callback<Class<?>, Object>() {
-                       @Override
-                       public Object call(Class<?> param) {
-                           if(param == ChangePassController.class){
-                               ChangePassController changePassController = new ChangePassController();
-                               changePassController.setSupplier(supplierFound);
-                               return changePassController;
-                           }else{
-                               try{
-                                   return param.newInstance();
-                               }catch (Exception e){
-                                   throw new RuntimeException(e);
-                               }
-                           }
-                       }
-                   });
-                   Parent root = loader.load();
-                   Scene scene = new Scene(root);
-                   stage.setScene(scene);
-                   stage.show();
-                   return true;
-               } catch (IOException e) {
-                   //
-                   return false;
-               }
-           }
+               return logInSupplier(supplierFound);
+             }
            }
 
-        Customer customerFound;
+
         CustomersDB customersDB = CustomersDB.getInstance();
+        Customer customerFound = customersDB.searchCustomer(username, hashedPassword);
 
-//        if(username.equals("manager") && password.equals("passwordManager")){
-//            try{
-//                Stage stage = (Stage) loginButton.getScene().getWindow();
-//                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/manager_page.fxml"));
-//                Parent root = loader.load();
-//                Scene scene = new Scene(root);
-//                stage.setScene(scene);
-//                stage.show();
-//                return true ;
-//            }catch (IOException e){
-//
-//            }
-//        }
-
-
-        customerFound = customersDB.searchCustomer(username, hashedPassword);
-
-        //daca am gasit customerul
         if (customerFound != null) {
-            if (customerFound.getPassword_changed() != 0) {
-                try {
-                    Stage stage = (Stage) loginButton.getScene().getWindow();
-                    FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/customer_page.fxml"));
-                    loader.setControllerFactory(new Callback<Class<?>, Object>() {
-                        @Override
-                        public Object call(Class<?> param) {
-                            if(param == CustomerController.class){
-                                CustomerController customerController = new CustomerController();
-                                customerController.setCustomer(customerFound);
-                                return customerController;
-                            }else{
-                                try{
-                                    return param.newInstance();
-                                }catch (Exception e){
-                                    throw new RuntimeException(e);
-                                }
-                            }
-                        }
-                    });
-                    Parent root = loader.load();
-                    Scene scene = new Scene(root);
-                    stage.setScene(scene);
-                    stage.show();
-                    return true;
-                } catch (IOException e) {
-                    //
-                    return false;
-                }
-            }
+            return logInCustomer(customerFound);
+        }
 
+        Alert alert = new Alert(Alert.AlertType.NONE, "Couldn't log in", ButtonType.OK);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+        return false;
+    }
+
+
+    private boolean logInManager(){
+            try{
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                return true ;
+            }catch (IOException e){
+                return false;
+            }
+        }
+    private boolean logInSupplier(Supplier supplierFound){
+        if (supplierFound.getPassword_changed() != 0) {
             try {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/change_password_page.fxml"));
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/supplier_page.fxml"));
                 loader.setControllerFactory(new Callback<Class<?>, Object>() {
                     @Override
                     public Object call(Class<?> param) {
-                        if(param == ChangePassController.class){
-                            ChangePassController changePassController = new ChangePassController();
-                            changePassController.setCustomer(customerFound);
-                            return changePassController;
+                        if(param == SupplierController.class){
+                            SupplierController supplierController = new SupplierController();
+                            supplierController.setSupplier(supplierFound);
+                            return supplierController;
                         }else{
                             try{
                                 return param.newInstance();
@@ -214,12 +138,95 @@ public class LoginController {
             }
         }
 
-        Alert alert = new Alert(Alert.AlertType.NONE, "Couldn't log in", ButtonType.OK);
-        alert.showAndWait();
-        if (alert.getResult() == ButtonType.OK) {
-            alert.close();
+        //if the password is not changed
+        try {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/change_password_page.fxml"));
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    if(param == ChangePassController.class){
+                        ChangePassController changePassController = new ChangePassController();
+                        changePassController.setSupplier(supplierFound);
+                        return changePassController;
+                    }else{
+                        try{
+                            return param.newInstance();
+                        }catch (Exception e){
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            });
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            return true;
+        } catch (IOException e) {
+            //
+            return false;
+        }
+    }
+    private boolean logInCustomer(Customer customerFound){
+        if (customerFound.getPassword_changed() != 0) {
+            try {
+                Stage stage = (Stage) loginButton.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_page.fxml"));
+                loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                    @Override
+                    public Object call(Class<?> param) {
+                        if(param == CustomerController.class){
+                            CustomerController customerController = new CustomerController();
+                            customerController.setCustomer(customerFound);
+                            return customerController;
+                        }else{
+                            try{
+                                return param.newInstance();
+                            }catch (Exception e){
+                                throw new RuntimeException(e);
+                            }
+                        }
+                    }
+                });
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+                return true;
+            } catch (IOException e) {
+                //
+                return false;
+            }
         }
 
-        return false;
+        try {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/change_password_page.fxml"));
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    if(param == ChangePassController.class){
+                        ChangePassController changePassController = new ChangePassController();
+                        changePassController.setCustomer(customerFound);
+                        return changePassController;
+                    }else{
+                        try{
+                            return param.newInstance();
+                        }catch (Exception e){
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            });
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            return true;
+        } catch (IOException e) {
+            //
+            return false;
+        }
     }
 }

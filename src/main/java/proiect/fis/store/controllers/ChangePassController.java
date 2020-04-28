@@ -8,7 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
 import proiect.fis.store.model.Customer;
+import proiect.fis.store.model.HashPassword;
 import proiect.fis.store.model.Supplier;
+import proiect.fis.store.model.databases.CustomersDB;
+import proiect.fis.store.model.databases.SupplierDB;
 
 import java.io.IOException;
 
@@ -37,33 +40,58 @@ public class ChangePassController {
 
     @FXML
     public void switchToMainPage() {
-        try {
-            Stage stage = (Stage) backToMainPage.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("../view/customer_page.fxml"));
-            Parent root = loader.load();
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
+        if(customer != null){
+            try {
+                Stage stage = (Stage) backToMainPage.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_page.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
 
+            }
+        }else{
+            try {
+                Stage stage = (Stage) backToMainPage.getScene().getWindow();
+                FXMLLoader loader = new FXMLLoader(getClass().getResource("/supplier_page.fxml"));
+                Parent root = loader.load();
+                Scene scene = new Scene(root);
+                stage.setScene(scene);
+                stage.show();
+            } catch (IOException e) {
+
+            }
         }
+
     }
 
-//    public void changePassword(){
-//        DataSource dataSource = DataSource.getInstance();
-//        String username = customer.getUsername();
-//        String password = passwordInput.getText();
-//        System.out.println("new password: " + password);
-//
-//        passwordInput.clear();
-//
-//        String hashedPassword = EncryptPassword.encrypt(password);
-//        if(dataSource.updatePassword(username,hashedPassword)){
-//            backToMainPage.setDisable(false);
-//            return ;
-//        }
-//
-//        System.out.println("i didn't succeed");
-//    }
+    public boolean changePassword(){
+        String username;
+        String password = passwordInput.getText();
+        passwordInput.clear();
+
+        String hashedPassword = HashPassword.encrypt(password);
+
+        if(customer != null){
+            username = customer.getUsername();
+            CustomersDB customersDB = CustomersDB.getInstance();
+
+            if(customersDB.updatePassword(username,hashedPassword)){
+                backToMainPage.setDisable(false);
+                return true;
+            }
+
+            return false;
+        }
+        username = supplier.getUsername();
+        SupplierDB supplierDB = SupplierDB.getInstance();
+        if(supplierDB.updatePassword(username,hashedPassword)){
+            backToMainPage.setDisable(false);
+            return true ;
+        }
+
+        return false ;
+    }
 
 }

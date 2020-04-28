@@ -34,6 +34,9 @@ public class CustomersDB {
     public static final String SEARCH_CUSTOMER = "SELECT *" + " FROM " + TABLE_NAME + " WHERE " +
             COLUMN_USERNAME + " = ? AND " + COLUMN_PASSWORD + "= ?";
 
+    public static final String CHANGE_PASSWOWRD_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_PASSWORD + " = ?," +
+            COLUMN_PASSWORD_STATUS + " = 1 WHERE " + COLUMN_USERNAME + "= ?";
+
     private Connection connection;
     private PreparedStatement insertCustomer ;
     private static CustomersDB instance = new CustomersDB();
@@ -107,6 +110,21 @@ public class CustomersDB {
             System.out.println("Couldn't connect to database " + e.getMessage());
             e.printStackTrace();
             return null;
+        }
+    }
+
+
+    public boolean updatePassword(String username, String newPassword) {
+        try (PreparedStatement updatePass = connection.prepareStatement(CHANGE_PASSWOWRD_CUSTOMER)) {
+
+            updatePass.setString(1, newPassword);
+            updatePass.setString(2, username);
+            updatePass.executeUpdate();
+            return true;
+        } catch (SQLException e) {
+            System.out.println("Error on database " + e.getMessage());
+            e.printStackTrace();
+            return false;
         }
     }
 
