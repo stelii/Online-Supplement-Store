@@ -5,8 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-import proiect.fis.store.model.databases.CustomersDB;
-import proiect.fis.store.model.databases.SupplierDB;
+import proiect.fis.store.model.databases.*;
 
 import java.sql.SQLException;
 
@@ -31,6 +30,12 @@ public class Main extends Application {
         customersDB.open();
         SupplierDB supplierDB = SupplierDB.getInstance();
         supplierDB.openConnection();
+        DemandsDB demandsDB = DemandsDB.getInstance();
+        demandsDB.openConnection();
+        OrdersDB ordersDB = OrdersDB.getInstance();
+        ordersDB.open();
+        StockDB stockDB = StockDB.getInstance();
+        stockDB.openConnection();
     }
 
 
