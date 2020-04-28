@@ -69,20 +69,18 @@ public class LoginController {
 
         if(checkButton.isSelected()){
             SupplierDB supplierDB = SupplierDB.getInstance();
-
            Supplier supplierFound = supplierDB.searchSupplier(username,hashedPassword);
-           if(supplierFound != null){
+
+           if(supplierFound != null)
                return logInSupplier(supplierFound);
-             }
            }
 
 
         CustomersDB customersDB = CustomersDB.getInstance();
         Customer customerFound = customersDB.searchCustomer(username, hashedPassword);
 
-        if (customerFound != null) {
+        if (customerFound != null)
             return logInCustomer(customerFound);
-        }
 
         Alert alert = new Alert(Alert.AlertType.NONE, "Couldn't log in", ButtonType.OK);
         alert.showAndWait();
