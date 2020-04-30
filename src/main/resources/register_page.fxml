@@ -14,7 +14,7 @@
         <Button fx:id="registerButton" layoutX="271.0" layoutY="194.0" mnemonicParsing="false" onAction="#register" text="Register" />
         <Button fx:id="toLoginBtn" layoutX="257.0" layoutY="225.0" mnemonicParsing="false" onAction="#switchToLogin" text="Back to Login" />
         <Label layoutX="216.0" layoutY="33.0" text="The password will be generated" />
-      <ComboBox fx:id="roleChoice" layoutX="226.0" layoutY="160.0" prefWidth="150.0" />
+      <ComboBox fx:id="roleChoice" layoutX="226.0" layoutY="160.0" prefWidth="150.0" onMouseClicked="#setButtonProperties"/>
       <Label layoutX="229.0" layoutY="143.0" text="Register as:" />
     </children>
 
