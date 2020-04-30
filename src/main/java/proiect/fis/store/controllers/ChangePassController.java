@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.HashPassword;
 import proiect.fis.store.model.Supplier;
@@ -44,6 +45,22 @@ public class ChangePassController {
             try {
                 Stage stage = (Stage) backToMainPage.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_page.fxml"));
+                loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                    @Override
+                    public Object call(Class<?> param) {
+                        if(param == CustomerController.class){
+                            CustomerController controller = new CustomerController();
+                            controller.setCustomer(customer);
+                            return controller;
+                        }else{
+                            try{
+                                return param.newInstance();
+                            }catch (Exception e){
+                                return new RuntimeException(e);
+                            }
+                        }
+                    }
+                });
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
