@@ -1,16 +1,30 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
 
-
-<?import javafx.scene.control.Label?>
-<VBox alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity"
-      minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0"
-      fx:controller="proiect.fis.store.controllers.CustomerController"
-      xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="553.0" prefWidth="739.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.CustomerController">
    <children>
-      <Label text="Welcome to customer page"/>
-   </children>
+      <TableView fx:id="myTable" layoutX="35.0" layoutY="23.0" prefHeight="378.0" prefWidth="404.0">
+       <columns>
+           <TableColumn fx:id="nameColumn" prefWidth="122" text="Name" />
+           <TableColumn fx:id="priceColumn" prefWidth="122" text="Price" />
+           <TableColumn fx:id="quantityColumn" prefWidth="100" text="Quantity" />
+       </columns>
+   </TableView>
 
-</VBox>
+
+
+      <Button fx:id="addToBucketButton" layoutX="180.0" layoutY="437.0" mnemonicParsing="false" onAction="#addToBucket" text="Add to bucket" />
+      <Button fx:id="viewBucketButton" layoutX="514.0" layoutY="185.0" mnemonicParsing="false" onAction="#viewBucketPage" text="View bucket" />
+
+       <TextField fx:id="searchBar" layoutX="514.0" layoutY="23.0" onKeyReleased="#searchProduct" promptText="Search here" />
+      <Button layoutX="514.0" layoutY="134.0" mnemonicParsing="false" text="View Delivery status" />
+      <Button layoutX="514.0" layoutY="77.0" mnemonicParsing="false" text="View Account details" />
+       
+
+   </children>
+</AnchorPane>
