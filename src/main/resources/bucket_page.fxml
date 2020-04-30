@@ -22,9 +22,9 @@
     <Label layoutX="504.0" layoutY="257.0" text="Set quantity:" />
 
 
-    <Button fx:id="plusButton" layoutX="610.0" layoutY="216.0" mnemonicParsing="false" onAction="#updateQuantity" text="+" />
+    <Button fx:id="plusButton" layoutX="610.0" layoutY="216.0" mnemonicParsing="false" onAction="#changeQuantity" text="+" />
 
-    <Button fx:id="minusButton" layoutX="613.0" layoutY="285.0" mnemonicParsing="false" onAction="#updateQuantity" text="-" />
+    <Button fx:id="minusButton" layoutX="613.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeQuantity" text="-" />
 
     <Button fx:id="saveButton" layoutX="697.0" layoutY="252.0" mnemonicParsing="false" onAction="#saveQuantity" text="Save " />
     <Button fx:id="deleteButton" layoutX="665.0" layoutY="301.0" mnemonicParsing="false" onAction="#deleteProduct" text="Delete Product" />

@@ -1,10 +1,9 @@
 package proiect.fis.store.controllers;
 
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.Order;
@@ -27,6 +26,13 @@ public class BucketController {
     private TableColumn<Product,Integer> quantityColumn ;
     @FXML
     private TableColumn<Product,Double> priceColumn ;
+
+    @FXML
+    private Label quantitySize ;
+    @FXML
+    private Button plusButton;
+    @FXML
+    private Button minusButton ;
 
     @FXML
     private Button placeOrderButton;
@@ -81,7 +87,32 @@ public class BucketController {
         }
     }
 
+    public void changeQuantity(ActionEvent e){
+        int value = Integer.parseInt(quantitySize.getText());
+        if(e.getSource().equals(plusButton)){
+            value = value + 1 ;
+            quantitySize.setText(value + "");
+        }else if(e.getSource().equals(minusButton) && value > 0){
+            value = value - 1 ;
+            quantitySize.setText(value + "");
+        }
+    }
 
+    public void saveQuantity(){
+        int value = Integer.parseInt(quantitySize.getText());
+        quantitySize.setText("1");
+        int position = myTable.getSelectionModel().getSelectedIndex();
+        if(position < 0){
+            Alert alert = new Alert(Alert.AlertType.WARNING,"PLEASE SELECT AN ITEM", ButtonType.OK);
+            alert.showAndWait();
+            if(alert.getResult() == ButtonType.OK){
+                alert.close();
+            }
+            return ;
+        }
+        bucketList.get(position).setQuantity(value);
+        myTable.refresh();
+    }
 
 
 

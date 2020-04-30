@@ -1,9 +1,8 @@
 package proiect.fis.store.model.databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import proiect.fis.store.model.Order;
+
+import java.sql.*;
 
 public class OrdersDB {
     public static final String DB_NAME = "store.db";
@@ -22,6 +21,8 @@ public class OrdersDB {
             COLUMN_DELIVERY_STATUS + " TEXT," + COLUMN_CUSTOMER_NAME + " TEXT" +
             ")";
 
+    public static final String INSERT_PRODUCT = "INSERT INTO " + TABLE_NAME +
+            " VALUES (?,?,?,?,?)";
     private Connection connection;
 
     private static OrdersDB instance = new OrdersDB();
@@ -50,6 +51,28 @@ public class OrdersDB {
             if(connection != null)
                 connection.close();
             return true ;
+        }catch (SQLException e){
+            //
+            return false;
+        }
+    }
+
+    public boolean add(Order order){
+        String username = order.getUsername();
+        String productName = order.getName();
+        double price = order.getPrice();
+        int quantity = order.getQuantity();
+        String deliveryStatus = order.getDeliveryStatus();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCT)){
+            preparedStatement.setString(1,productName);
+            preparedStatement.setDouble(2,price);
+            preparedStatement.setInt(3,quantity);
+            preparedStatement.setString(4,deliveryStatus);
+            preparedStatement.setString(5,username);
+
+            int rez = preparedStatement.executeUpdate();
+            return rez > 0;
         }catch (SQLException e){
             //
             return false;
