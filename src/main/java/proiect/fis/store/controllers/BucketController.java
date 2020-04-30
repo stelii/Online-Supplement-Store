@@ -35,6 +35,9 @@ public class BucketController {
     private Button minusButton ;
 
     @FXML
+    private Button deleteButton ;
+
+    @FXML
     private Button placeOrderButton;
 
     public void initialize() {
@@ -114,7 +117,11 @@ public class BucketController {
         myTable.refresh();
     }
 
-
+    public void deleteProduct(){
+        int position = myTable.getSelectionModel().getSelectedIndex();
+        bucketList.remove(position);
+        myTable.refresh();
+    }
 
 
 
