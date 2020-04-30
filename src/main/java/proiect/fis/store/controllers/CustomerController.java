@@ -1,10 +1,13 @@
 package proiect.fis.store.controllers;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.Product;
@@ -23,6 +26,18 @@ public class CustomerController {
     private TableColumn<Product,Integer> quantityColumn ;
     @FXML
     private TableColumn<Product,Double> priceColumn ;
+
+
+    private ObservableList<Product> bucket = FXCollections.observableArrayList();
+    @FXML
+    private Button addToBucketButton;
+
+    @FXML
+    private Button viewBucketButton;
+
+    @FXML
+    private TextField searchBar ;
+
 
     private FilteredList<Product> filteredProducts = new FilteredList<>(getProducts(), new Predicate<Product>() {
         @Override
@@ -50,7 +65,25 @@ public class CustomerController {
         return products;
     }
 
+    public void searchProduct(){
+        filteredProducts.setPredicate(new Predicate<Product>() {
+            @Override
+            public boolean test(Product product) {
+                boolean rezult =  product.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim());
+                return rezult ;
+            }
+        });
+    }
+
     public void setCustomer(Customer customer){
         this.customer = customer;
     }
+    public void setBucket(ObservableList<Product> bucket){
+        this.bucket = bucket ;
+    }
+
+
+
+
+
 }
