@@ -109,7 +109,7 @@ public class RegisterController {
         String username = usernameInput.getText();
         String name = nameInput.getText();
         boolean isDisabled = username.isEmpty() || username.trim().isEmpty() ||
-                name.isEmpty() || name.trim().isEmpty();
+                name.isEmpty() || name.trim().isEmpty() || roleChoice.getSelectionModel().isEmpty();
         registerButton.setDisable(isDisabled);
     }
 
