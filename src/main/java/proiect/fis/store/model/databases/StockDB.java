@@ -1,9 +1,10 @@
 package proiect.fis.store.model.databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import proiect.fis.store.model.Product;
+
+import java.sql.*;
 
 public class StockDB {
     public static final String TABLE_NAME = "stock";
@@ -31,6 +32,25 @@ public class StockDB {
             return false;
         }
 
+    }
+
+    public ObservableList<Product> returnProducts(){
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + TABLE_NAME );
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString(1);
+                double price = resultSet.getDouble(2);
+                int quantity = resultSet.getInt(3);
+                Product product = new Product(name,price,quantity);
+                products.add(product);
+            }
+            return products;
+        }catch (SQLException e){
+            //
+            return null ;
+        }
     }
 
     public void closeConnection () {
