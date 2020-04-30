@@ -1,16 +1,23 @@
 package proiect.fis.store.controllers;
 
 import javafx.collections.ObservableList;
+import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.Stage;
+import javafx.util.Callback;
 import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.Order;
 import proiect.fis.store.model.Product;
 import proiect.fis.store.model.databases.OrdersDB;
 import proiect.fis.store.model.databases.StockDB;
 
+import java.io.IOException;
 import java.util.Observable;
 import java.util.Random;
 
@@ -36,6 +43,8 @@ public class BucketController {
 
     @FXML
     private Button deleteButton ;
+    @FXML
+    private Button backToMainButton;
 
     @FXML
     private Button placeOrderButton;
@@ -123,8 +132,36 @@ public class BucketController {
         myTable.refresh();
     }
 
+    public void backToMain(){
+        Stage stage = (Stage) backToMainButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_page.fxml"));
+        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> param) {
+                if(param == CustomerController.class){
+                    CustomerController controller = new CustomerController();
+                    controller.setCustomer(customer);
+                    controller.setBucket(bucketList);
+                    return controller;
+                }else{
+                    try{
+                        return param.newInstance();
+                    }catch (Exception e){
+                        return new RuntimeException(e);
+                    }
+                }
+            }
+        });
 
-
+        try{
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        }catch (IOException e){
+            //
+        }
+    }
 
 
 
