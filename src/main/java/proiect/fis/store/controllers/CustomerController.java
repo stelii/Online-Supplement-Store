@@ -42,7 +42,7 @@ public class CustomerController {
     private TextField searchBar ;
 
 
-    private FilteredList<Product> filteredProducts = new FilteredList<>(getProducts(), new Predicate<Product>() {
+    private FilteredList<Product> filteredProducts = new FilteredList<>(getProductsList(), new Predicate<Product>() {
         @Override
         public boolean test(Product product) {
             return true ;
@@ -59,11 +59,11 @@ public class CustomerController {
 
     }
 
-    private ObservableList<Product> getProducts(){
+    private ObservableList<Product> getProductsList(){
         ObservableList<Product> products ;
 
         StockDB stockDB = StockDB.getInstance();
-        products = stockDB.returnProducts();
+        products = stockDB.getProducts();
 
         return products;
     }

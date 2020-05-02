@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.StockPageController">
+    <children>
+        <Button fx:id="backFromStock" layoutX="528.0" layoutY="332.0" mnemonicParsing="false" onAction="#backToManagerPage" text="Back" />
+        <TableView fx:id="productTable" layoutX="26.0" layoutY="155.0" prefHeight="200.0" prefWidth="229.0">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="75.0" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="75.0" text="Price" />
+                <TableColumn fx:id="quantityColumn" prefWidth="75.0" text="Quantity" />
+            </columns>
+        </TableView>
+        <TextField fx:id="filterField" layoutX="26.0" layoutY="130.0" onKeyReleased="#searchProduct" prefHeight="26.0" prefWidth="230.0" promptText="Search here" />
+      <Button layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Add to demands" />
+      <Button fx:id="goToDemandsPage" layoutX="282.0" layoutY="155.0" mnemonicParsing="false" text="View Demands" />
+    </children>
+</AnchorPane>
