@@ -20,12 +20,12 @@
       </TableView>
       <Button fx:id="mainPageButton" layoutX="537.0" layoutY="340.0" mnemonicParsing="false" onAction="#goToManagerPage" text="Back" />
       <Button fx:id="stockPageButton" layoutX="442.0" layoutY="86.0" mnemonicParsing="false" onAction="#goToStockPage" text="View Current Stock" />
-      <Button layoutX="309.0" layoutY="340.0" mnemonicParsing="false" text="Delete From Bucket" />
-      <Button layoutX="388.0" layoutY="213.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="36.0" text="+" />
+      <Button fx:id="deleteButton" layoutX="309.0" layoutY="340.0" mnemonicParsing="false" onAction="#deleteProduct" text="Delete From Bucket" />
+      <Button fx:id="plusButton" layoutX="388.0" layoutY="213.0" mnemonicParsing="false" onAction="#changeQuantity" prefHeight="31.0" prefWidth="36.0" text="+" />
       <Label layoutX="302.0" layoutY="247.0" text="Set quantity" />
-      <Label layoutX="398.0" layoutY="247.0" text="1" />
-      <Button layoutX="394.0" layoutY="276.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="26.0" text="-" />
-      <Button layoutX="442.0" layoutY="242.0" mnemonicParsing="false" text="Save" />
+      <Label fx:id="quantity" layoutX="398.0" layoutY="247.0" text="1" />
+      <Button fx:id="minusButton" layoutX="394.0" layoutY="276.0" mnemonicParsing="false" onAction="#changeQuantity" prefHeight="31.0" prefWidth="26.0" text="-" />
+      <Button fx:id="saveButton" layoutX="442.0" layoutY="242.0" mnemonicParsing="false" onAction="#saveQuantity" text="Save" />
       <Button layoutX="310.0" layoutY="86.0" mnemonicParsing="false" text="Send Demand" />
    </children>
 </AnchorPane>
