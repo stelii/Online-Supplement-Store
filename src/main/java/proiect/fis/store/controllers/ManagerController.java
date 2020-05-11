@@ -40,7 +40,7 @@ public class ManagerController {
     public boolean goToClientsPage() {
         try {
             Stage stage = (Stage) clientsPageButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/clients_page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_list_page.fxml"));
             Parent cp = loader.load();
             Scene scene = new Scene(cp);
             stage.setScene(scene);
@@ -74,7 +74,7 @@ public class ManagerController {
     public boolean goToStockPage() {
         try {
             Stage stage = (Stage) stockPageButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view_stock.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock_page.fxml"));
             Parent viewStock = loader.load();
             Scene viewStockScene = new Scene(viewStock);
             stage.setScene(viewStockScene);

@@ -14,7 +14,7 @@
             </columns>
         </TableView>
         <TextField fx:id="filterField" layoutX="26.0" layoutY="130.0" onKeyReleased="#searchProduct" prefHeight="26.0" prefWidth="230.0" promptText="Search here" />
-      <Button layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Add to demands" />
-      <Button fx:id="goToDemandsPage" layoutX="282.0" layoutY="155.0" mnemonicParsing="false" text="View Demands" />
+      <Button fx:id="addToDemands" onAction="#addToDemandsBucket" layoutX="277.0" layoutY="332.0" mnemonicParsing="false" text="Add to demands" />
+      <Button fx:id="goToDemandsPage" layoutX="282.0" layoutY="155.0" mnemonicParsing="false" onAction="#goToDemandsPage" text="View Demands" />
     </children>
 </AnchorPane>

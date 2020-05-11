@@ -15,6 +15,13 @@ public class Customer {
         this.password = password;
         this.password_changed = password_changed;
     }
+    public Customer(String username, String name, String email, String phone, String address) {
+        this.username = username;
+        this.name = name;
+        this.email = email;
+        this.phone = phone;
+        this.address = address;
+    }
 
     public String getUsername() {
         return username;
