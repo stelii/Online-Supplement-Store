@@ -1,30 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
-<?import javafx.scene.text.Text?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
-
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="DemandsPage">
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.DemandsPageController">
    <children>
       <Text layoutX="33.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Demands Page">
          <font>
             <Font size="38.0" />
          </font>
       </Text>
-      <TableView layoutX="33.0" layoutY="86.0" prefHeight="285.0" prefWidth="252.0">
+      <TableView fx:id="demands" layoutX="33.0" layoutY="86.0" prefHeight="285.0" prefWidth="252.0">
         <columns>
-          <TableColumn prefWidth="82.0" text="Name" />
-            <TableColumn minWidth="0.0" prefWidth="83.0" text="Price" />
-          <TableColumn prefWidth="86.0" text="Quantity" />
+          <TableColumn fx:id="nameColumn" prefWidth="82.0" text="Name" />
+            <TableColumn fx:id="priceColumn" minWidth="0.0" prefWidth="83.0" text="Price" />
+          <TableColumn fx:id="quantityColumn" prefWidth="86.0" text="Quantity" />
         </columns>
       </TableView>
-      <Button layoutX="537.0" layoutY="340.0" mnemonicParsing="false" text="Back" />
-      <Button layoutX="442.0" layoutY="86.0" mnemonicParsing="false" text="View Current Stock" />
+      <Button fx:id="mainPageButton" layoutX="537.0" layoutY="340.0" mnemonicParsing="false" onAction="#goToManagerPage" text="Back" />
+      <Button fx:id="stockPageButton" layoutX="442.0" layoutY="86.0" mnemonicParsing="false" onAction="#goToStockPage" text="View Current Stock" />
       <Button layoutX="309.0" layoutY="340.0" mnemonicParsing="false" text="Delete Demand" />
-      <Button layoutX="309.0" layoutY="294.0" mnemonicParsing="false" text="Button" />
+      <Button layoutX="309.0" layoutY="294.0" mnemonicParsing="false" />
    </children>
 </AnchorPane>
