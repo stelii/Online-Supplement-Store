@@ -1,11 +1,13 @@
 package proiect.fis.store.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import proiect.fis.store.model.Product;
 
 import java.io.IOException;
 
@@ -19,6 +21,7 @@ public class ManagerController {
     @FXML
     private Button stockPageButton;
 
+    private ObservableList<Product> demandsList;
     @FXML
     public boolean logout() {
         try {
@@ -35,7 +38,9 @@ public class ManagerController {
             return false;
         }
     }
-
+    public void setData(ObservableList<Product> demands) {
+        this.demandsList = demands;
+    }
     @FXML
     public boolean goToClientsPage() {
         try {

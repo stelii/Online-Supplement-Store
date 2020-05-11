@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import proiect.fis.store.model.Product;
 
 import java.io.IOException;
@@ -24,7 +25,7 @@ public class DemandsPageController {
     @FXML
     private TableColumn<Product, Double> priceColumn;
     @FXML
-    private javafx.scene.control.Button mainPageButton;
+    private Button mainPageButton;
     @FXML
     private Button stockPageButton;
     @FXML
@@ -50,36 +51,70 @@ public class DemandsPageController {
 
     @FXML
     public boolean goToManagerPage() {
-        try {
             Stage stage = (Stage) mainPageButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
-            Parent managerPage = loader.load();
-            Scene ManagerPage = new Scene(managerPage);
-            stage.setScene(ManagerPage);
-            stage.setTitle("Manager Page");
-            stage.show();
-            return true;
-        } catch (IOException e) {
-            System.out.println("Error");
-            return false;
-        }
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    if(param == ManagerController.class) {
+                        ManagerController controller = new ManagerController();
+                        controller.setData(demandsList);
+                        return controller;
+                    }else{
+                        try{
+                            return param.newInstance();
+                        }catch (Exception e) {
+                            throw new RuntimeException(e);
+                        }
+                    }
+                }
+            });
+            try{
+                Parent parent = loader.load();
+                Scene scene = new Scene(parent);
+                stage.setScene(scene);
+                stage.setTitle("Manager Page");
+                stage.show();
+                return true;
+            }catch (IOException e) {
+                System.out.println("Error");
+                return false;
+            }
+
     }
 
     @FXML
     public boolean goToStockPage() {
-        try {
             Stage stage = (Stage) stockPageButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock_page.fxml"));
-            Parent parent = loader.load();
-            Scene scene = new Scene(parent);
-            stage.setScene(scene);
-            stage.setTitle("Stock Page");
-            stage.show();
-            return true;
-        } catch (IOException e) {
-        }
-        System.out.println("Error");
-        return false;
+            loader.setControllerFactory(new Callback<Class<?>, Object>() {
+                @Override
+                public Object call(Class<?> param) {
+                    if(param == StockPageController.class) {
+                        StockPageController controller = new StockPageController();
+                        controller.setData(demandsList);
+                        return controller;
+                    }else {
+                        try{
+                            return param.newInstance();
+                        }catch (Exception e) {
+                            throw new RuntimeException();
+                        }
+                    }
+                }
+            });
+            try {
+                Parent parent = loader.load();
+                Scene scene = new Scene(parent);
+                stage.setScene(scene);
+                stage.setTitle("Stock Page");
+                stage.show();
+                return true;
+            }catch (IOException e) {
+                System.out.println(e.getStackTrace());
+                return false;
+            }
+
     }
 
     @FXML
