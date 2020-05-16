@@ -1,7 +1,6 @@
 package proiect.fis.store.controllers;
 
 import javafx.collections.FXCollections;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -22,8 +21,7 @@ import java.util.function.Predicate;
 public class StockPageController {
     @FXML
     private TextField filterField;
-  //  @FXML
-    //private Button addToDemands;
+
     @FXML
     private Button backFromStock;
     @FXML

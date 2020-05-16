@@ -22,6 +22,7 @@ public class ManagerController {
     private Button stockPageButton;
 
     private ObservableList<Product> demandsList;
+
     @FXML
     public boolean logout() {
         try {

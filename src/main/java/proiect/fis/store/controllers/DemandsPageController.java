@@ -11,6 +11,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import proiect.fis.store.model.Product;
+import proiect.fis.store.model.databases.DemandsDB;
+import proiect.fis.store.model.databases.StockDB;
 
 import java.io.IOException;
 
@@ -151,4 +153,14 @@ public class DemandsPageController {
         demandsList.remove(position);
         demands.refresh();
     }
+    @FXML
+    public void makeDemand() {
+        ObservableList<Product> demandsToBeMade = demands.getItems();
+        DemandsDB demandsDB = DemandsDB.getInstance();
+        StockDB stockDB = StockDB.getInstance();
+        for(int i = 0; i < demandsToBeMade.size(); ++i) {
+            demandsDB.addDemand(demandsToBeMade.get(i));
+        }
+    }
+
 }
