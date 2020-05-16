@@ -23,7 +23,7 @@
       <Button fx:id="deleteButton" layoutX="309.0" layoutY="340.0" mnemonicParsing="false" onAction="#deleteProduct" text="Delete From Bucket" />
       <Button fx:id="plusButton" layoutX="388.0" layoutY="213.0" mnemonicParsing="false" onAction="#changeQuantity" prefHeight="31.0" prefWidth="36.0" text="+" />
       <Label layoutX="302.0" layoutY="247.0" text="Set quantity" />
-<!--      <Label fx:id="quantity" layoutX="398.0" layoutY="247.0" text="1" />-->
+      <Label fx:id="quantityText" layoutX="398.0" layoutY="247.0" text="1" />
       <Button fx:id="minusButton" layoutX="394.0" layoutY="276.0" mnemonicParsing="false" onAction="#changeQuantity" prefHeight="31.0" prefWidth="26.0" text="-" />
       <Button fx:id="saveButton" layoutX="442.0" layoutY="242.0" mnemonicParsing="false" onAction="#saveQuantity" text="Save" />
       <Button fx:id="sendDemandButton" onAction="#makeDemand" layoutX="310.0" layoutY="86.0" mnemonicParsing="false" text="Send Demand" />

@@ -31,7 +31,7 @@ public class DemandsPageController {
     @FXML
     private Button stockPageButton;
     @FXML
-    private Button quantity;
+    private TextField quantityText;
     @FXML
     private Button plusButton;
     @FXML
@@ -121,20 +121,20 @@ public class DemandsPageController {
 
     @FXML
     public void changeQuantity(ActionEvent e) {
-        int value = Integer.parseInt(quantity.getText());
+        int value = Integer.parseInt(quantityText.getText());
         if (e.getSource().equals(plusButton)) {
             value = value + 1;
-            quantity.setText(value + "");
+            quantityText.setText(value + "");
         } else if (e.getSource().equals(minusButton) && value > 0) {
             value = value - 1;
-            quantity.setText(value + "");
+            quantityText.setText(value + "");
         }
     }
 
     @FXML
     public void saveQuantity() {
-        int value = Integer.parseInt(quantity.getText());
-        quantity.setText("1");
+        int value = Integer.parseInt(quantityText.getText());
+        quantityText.setText("1");
         int position = demands.getSelectionModel().getSelectedIndex();
         if (position < 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "PLEASE SELECT AN ITEM", ButtonType.OK);
@@ -154,13 +154,17 @@ public class DemandsPageController {
         demands.refresh();
     }
     @FXML
-    public void makeDemand() {
+    public boolean makeDemand() {
         ObservableList<Product> demandsToBeMade = demands.getItems();
         DemandsDB demandsDB = DemandsDB.getInstance();
         StockDB stockDB = StockDB.getInstance();
+        int res = 0;
         for(int i = 0; i < demandsToBeMade.size(); ++i) {
             demandsDB.addDemand(demandsToBeMade.get(i));
+             res = 1;
         }
+        if(res > 0) return true;
+        return false;
     }
 
 }
