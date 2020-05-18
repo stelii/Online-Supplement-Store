@@ -10,8 +10,10 @@ import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
+import proiect.fis.store.model.Order;
 import proiect.fis.store.model.Product;
 import proiect.fis.store.model.databases.DemandsDB;
+import proiect.fis.store.model.databases.OrdersDB;
 import proiect.fis.store.model.databases.StockDB;
 
 import java.io.IOException;
@@ -31,7 +33,7 @@ public class DemandsPageController {
     @FXML
     private Button stockPageButton;
     @FXML
-    private TextField quantityText;
+    private Label quantityText;
     @FXML
     private Button plusButton;
     @FXML
@@ -155,12 +157,37 @@ public class DemandsPageController {
     }
     @FXML
     public boolean makeDemand() {
+//        ObservableList<Product> productsToBeOrdered = myTable.getItems();
+//
+//        OrdersDB ordersDB = OrdersDB.getInstance();
+//        StockDB stockDB = StockDB.getInstance();
+//
+//        for(int i = 0 ; i < productsToBeOrdered.size(); i++){
+//            String name = productsToBeOrdered.get(i).getName();
+//            int quantity = productsToBeOrdered.get(i).getQuantity();
+//            double price = productsToBeOrdered.get(i).getPrice();
+//            String username = customer.getUsername();
+//            String deliveryStatus = deliveryRandom();
+//
+//            Order order = new Order(name,price,quantity,deliveryStatus,username);
+//
+//            if(ordersDB.add(order)){
+//                stockDB.withdrawQuantity(productsToBeOrdered.get(i),quantity);
+//            }else{
+//                //
+//            }
+//        }
+//    }
         ObservableList<Product> demandsToBeMade = demands.getItems();
         DemandsDB demandsDB = DemandsDB.getInstance();
         StockDB stockDB = StockDB.getInstance();
         int res = 0;
         for(int i = 0; i < demandsToBeMade.size(); ++i) {
-            demandsDB.addDemand(demandsToBeMade.get(i));
+            String productName = demandsToBeMade.get(i).getName();
+            int productQuantity = demandsToBeMade.get(i).getQuantity();
+            double productPrice = demandsToBeMade.get(i).getPrice();
+            Product product = new Product(productName, productPrice, productQuantity);
+            demandsDB.addDemand(product);
              res = 1;
         }
         if(res > 0) return true;

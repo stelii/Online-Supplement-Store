@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import javafx.util.Callback;
 import proiect.fis.store.model.Product;
 
 import java.io.IOException;
@@ -61,9 +62,53 @@ public class ManagerController {
 
     @FXML
     public boolean goToDemandsPage() {
+//        Stage stage = (Stage)viewBucketButton.getScene().getWindow();
+//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/bucket_page.fxml"));
+//        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+//            @Override
+//            public Object call(Class<?> param) {
+//                if(param == BucketController.class){
+//                    BucketController controller = new BucketController();
+//                    controller.setData(customer,bucket);
+//                    return controller;
+//                }else{
+//                    try{
+//                        return param.newInstance();
+//                    }catch (Exception e){
+//                        throw new RuntimeException(e);
+//                    }
+//                }
+//            }
+//        });
+//        try{
+//            Parent root = loader.load();
+//            Scene scene = new Scene(root);
+//            stage.setScene(scene);
+//            stage.show();
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//    }
+        Stage stage = (Stage)demandsPageButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/demands_page.fxml"));
+        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> param) {
+                if(param == DemandsPageController.class) {
+                    DemandsPageController controller = new DemandsPageController();
+                    controller.setData(demandsList);
+                    return controller;
+                }else{
+                    try {
+                        return param.newInstance();
+                    }catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
         try {
-            Stage stage = (Stage) demandsPageButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/demands_page.fxml"));
             Parent dp = loader.load();
             Scene scene = new Scene(dp);
             stage.setScene(scene);
