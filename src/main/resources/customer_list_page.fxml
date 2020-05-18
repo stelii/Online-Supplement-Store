@@ -5,17 +5,16 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.CustomerListController">
    <children>
-      <TableView fx:id="customerTable" layoutX="14.0" layoutY="36.0" prefHeight="200.0" prefWidth="500.0">
+      <TableView fx:id="customerTable" layoutX="14.0" layoutY="36.0" prefHeight="200.0" prefWidth="494.0">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
-          <TableColumn fx:id="usernameColumn" prefWidth="100.0" text="Username" />
-            <TableColumn fx:id="emailColumn" prefWidth="100.0" text="Email" />
-            <TableColumn fx:id="numberColumn" prefWidth="100.0" text="Phone Number" />
-            <TableColumn fx:id="addressColumn" prefWidth="100.0" text="Address" />
+          <TableColumn fx:id="nameColumn" sortable="true" prefWidth="100.0" text="Name" />
+          <TableColumn fx:id="usernameColumn" sortable="true" prefWidth="100.0" text="Username" />
+            <TableColumn fx:id="emailColumn" sortable="true" prefWidth="100.0" text="Email" />
+            <TableColumn fx:id="numberColumn" sortable="true" prefWidth="100.0" text="Phone Number" />
+            <TableColumn fx:id="addressColumn" sortable="true" prefWidth="100.0" text="Address" />
         </columns>
       </TableView>
       <TextField fx:id="searchField" alignment="CENTER" layoutX="14.0" layoutY="252.0" onKeyReleased="#searchCustomer" prefHeight="31.0" prefWidth="136.0" promptText="Search Customer" />
-      <Button fx:id="sortButton" layoutX="14.0" layoutY="304.0" mnemonicParsing="false" onAction="#sortCustomers" text="Sort by name" />
       <Button fx:id="backButton" layoutX="525.0" layoutY="351.0" mnemonicParsing="false" onAction="#goToManagerPage" text="Back" />
    </children>
 </AnchorPane>
