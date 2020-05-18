@@ -21,7 +21,7 @@ import java.util.function.Predicate;
 
 public class CustomerListController {
     @FXML
-    private Button backToMP;
+    private Button backButton;
     @FXML
     private TableView<Customer> customerTable;
     @FXML
@@ -44,7 +44,7 @@ public class CustomerListController {
     @FXML
     public boolean goToManagerPage() {
         try {
-            Stage stage = (Stage)backToMP.getScene().getWindow();
+            Stage stage = (Stage)backButton.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
             Parent managerPage = loader.load();
             Scene ManagerPage = new Scene(managerPage);
@@ -79,5 +79,11 @@ public class CustomerListController {
                 return result;
             }
         });
+    }
+    @FXML
+    public void sortCustomers() {
+        nameColumn.setSortType(TableColumn.SortType.DESCENDING);
+        System.out.println("Sorted");
+
     }
 }
