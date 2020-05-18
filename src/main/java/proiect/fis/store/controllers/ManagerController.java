@@ -1,11 +1,13 @@
 package proiect.fis.store.controllers;
 
+import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import proiect.fis.store.model.Product;
 
 import java.io.IOException;
 
@@ -18,6 +20,8 @@ public class ManagerController {
     private Button demandsPageButton;
     @FXML
     private Button stockPageButton;
+
+    private ObservableList<Product> demandsList;
 
     @FXML
     public boolean logout() {
@@ -35,12 +39,14 @@ public class ManagerController {
             return false;
         }
     }
-
+    public void setData(ObservableList<Product> demands) {
+        this.demandsList = demands;
+    }
     @FXML
     public boolean goToClientsPage() {
         try {
             Stage stage = (Stage) clientsPageButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/clients_page.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_list_page.fxml"));
             Parent cp = loader.load();
             Scene scene = new Scene(cp);
             stage.setScene(scene);
@@ -74,7 +80,7 @@ public class ManagerController {
     public boolean goToStockPage() {
         try {
             Stage stage = (Stage) stockPageButton.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/view_stock.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock_page.fxml"));
             Parent viewStock = loader.load();
             Scene viewStockScene = new Scene(viewStock);
             stage.setScene(viewStockScene);
