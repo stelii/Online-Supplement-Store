@@ -138,7 +138,7 @@ public class DemandsPageController {
     @FXML
     public void saveQuantity() {
         int value = Integer.parseInt(quantityText.getText());
-        quantityText.setText("1");
+       // quantityText.setText("1");
         int position = demands.getSelectionModel().getSelectedIndex();
         if (position < 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "PLEASE SELECT AN ITEM", ButtonType.OK);
@@ -159,27 +159,6 @@ public class DemandsPageController {
     }
     @FXML
     public boolean makeDemand() {
-//        ObservableList<Product> productsToBeOrdered = myTable.getItems();
-//
-//        OrdersDB ordersDB = OrdersDB.getInstance();
-//        StockDB stockDB = StockDB.getInstance();
-//
-//        for(int i = 0 ; i < productsToBeOrdered.size(); i++){
-//            String name = productsToBeOrdered.get(i).getName();
-//            int quantity = productsToBeOrdered.get(i).getQuantity();
-//            double price = productsToBeOrdered.get(i).getPrice();
-//            String username = customer.getUsername();
-//            String deliveryStatus = deliveryRandom();
-//
-//            Order order = new Order(name,price,quantity,deliveryStatus,username);
-//
-//            if(ordersDB.add(order)){
-//                stockDB.withdrawQuantity(productsToBeOrdered.get(i),quantity);
-//            }else{
-//                //
-//            }
-//        }
-//    }
         ObservableList<Product> demandsToBeMade = demands.getItems();
         DemandsDB demandsDB = DemandsDB.getInstance();
         int res = 0;
@@ -194,5 +173,11 @@ public class DemandsPageController {
         if(res > 0) return true;
         return false;
     }
-
+    @FXML
+    public boolean modifyQuantity() {
+        int position = demands.getSelectionModel().getSelectedIndex();
+        int quantity = demandsList.get(position).getQuantity();
+        quantityText.setText(String.valueOf(quantity));
+        return true;
+    }
 }

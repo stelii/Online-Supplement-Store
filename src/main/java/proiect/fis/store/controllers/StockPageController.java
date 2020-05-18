@@ -109,7 +109,9 @@ public class StockPageController {
     }
 
     public void setData(ObservableList<Product> demandsBucket) {
-        this.demandsBucket = demandsBucket;
+        if(demandsBucket != null) {
+            this.demandsBucket = demandsBucket;
+        }
     }
     @FXML
     public boolean goToDemandsPage() {
