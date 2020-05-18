@@ -40,6 +40,8 @@ public class DemandsPageController {
     private Button minusButton;
     @FXML
     private Button saveButton;
+    @FXML
+    private Button sendDemandButton;
 
     public void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
@@ -180,7 +182,6 @@ public class DemandsPageController {
 //    }
         ObservableList<Product> demandsToBeMade = demands.getItems();
         DemandsDB demandsDB = DemandsDB.getInstance();
-        StockDB stockDB = StockDB.getInstance();
         int res = 0;
         for(int i = 0; i < demandsToBeMade.size(); ++i) {
             String productName = demandsToBeMade.get(i).getName();
