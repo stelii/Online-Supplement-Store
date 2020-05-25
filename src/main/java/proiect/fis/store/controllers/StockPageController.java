@@ -104,6 +104,12 @@ public class StockPageController {
     @FXML
     public void addToDemandsBucket() {
         Product product = productTable.getSelectionModel().getSelectedItem();
+        for(int i = 0; i < demandsBucket.size(); ++i) {
+            if(demandsBucket.get(i).equals(product)) {
+                demandsBucket.get(i).updateQuantity(product.getQuantity());
+                return;
+            }
+        }
         demandsBucket.add(product);
         System.out.println(product.getName());
     }
