@@ -120,7 +120,7 @@ public class StockPageController {
                 for (int i = 0; i < demandsBucket.size(); ++i) {
                     if (demandsBucket.get(i).equals(createdProduct)) {
                         demandsBucket.get(i).updateQuantity(createdProduct.getQuantity());
-                        return;
+                        break;
                     }
                 }
             }
