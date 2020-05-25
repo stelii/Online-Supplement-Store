@@ -49,10 +49,13 @@ public class SupplierController {
         DemandsDB demandsDB = DemandsDB.getInstance();
 
         for(Product p : demands){
-            int quantity = p.getQuantity();
-            if(stockDB.addQuantity(p,quantity)){
-                demandsDB.deleteDemand(p);
+            Product searchedProduct = stockDB.getProduct(p);
+            if(searchedProduct != null){
+                stockDB.updateProduct(p);
+            }else{
+                stockDB.addProduct(p);
             }
+            demandsDB.deleteDemand(p);
         }
 
         demands.removeAll(demands);

@@ -74,7 +74,7 @@ public class DemandsDB {
         String name = product.getName();
         try{
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM " + TABLE_NAME +
-                    "WHERE name = ?");
+                    " WHERE name = ?");
             preparedStatement.setString(1,name);
             preparedStatement.executeUpdate();
         }catch (SQLException e){
