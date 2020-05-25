@@ -15,7 +15,7 @@ import proiect.fis.store.model.databases.CustomersDB;
 
 import java.io.IOException;
 
-public class AccountDetailsPage {
+public class AccountDetailsController {
 
 
     private Customer customer ;
@@ -37,6 +37,7 @@ public class AccountDetailsPage {
     private Button backToMainButton;
 
     public void initialize(){
+        System.out.println(customer.getAddress());
         username.setText(customer.getUsername());
         name.setText(customer.getName());
         email.setText(customer.getEmail());
