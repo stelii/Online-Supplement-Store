@@ -1,5 +1,6 @@
 package proiect.fis.store.model.databases;
 
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import proiect.fis.store.model.Product;
 
@@ -51,7 +52,22 @@ public class DemandsDB {
     }
 
     public ObservableList<Product> getDemands(){
-        return null;
+        ObservableList<Product> products = FXCollections.observableArrayList();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + TABLE_NAME );
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString(1);
+                double price = resultSet.getDouble(2);
+                int quantity = resultSet.getInt(3);
+                Product product = new Product(name,price,quantity);
+                products.add(product);
+            }
+            return products;
+        }catch (SQLException e){
+            //
+            return null ;
+        }
     }
 
     public boolean addDemand(Product product) {
