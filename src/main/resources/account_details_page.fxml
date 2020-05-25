@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane xmlns="http://javafx.com/javafx"
+            xmlns:fx="http://javafx.com/fxml"
+            fx:controller="proiect.fis.store.controllers.AccountDetailsPage"
+            prefHeight="400.0" prefWidth="600.0">
+
+    <children>
+        <Label layoutX="42.0" layoutY="41.0" text="Username :" />
+        <TextField fx:id="username" layoutX="151.0" layoutY="37.0" />
+        <Label layoutX="42.0" layoutY="85.0" text="Name :" />
+        <TextField fx:id="name" layoutX="151.0" layoutY="81.0"
+                   onKeyReleased="#setButtonProperties"/>
+
+        <Label layoutX="42.0" layoutY="127.0" text="Email :" />
+        <TextField fx:id="email" layoutX="151.0" layoutY="123.0" />
+        <Label layoutX="42.0" layoutY="172.0" text="Phone number :" />
+        <TextField fx:id="phoneNumber" layoutX="151.0" layoutY="168.0" />
+        <Label layoutX="46.0" layoutY="219.0" text="Addres :" />
+        <TextField fx:id="address" layoutX="151.0" layoutY="215.0" />
+
+
+        <Button layoutX="151.0" layoutY="265.0" mnemonicParsing="false" text="Save changes"
+                onAction="#saveChanges"
+                fx:id="saveChangesButton"/>
+        <Button layoutX="490.0" layoutY="350.0" mnemonicParsing="false" text="Back To Main"
+                onAction="#backToMain"
+                fx:id="backToMainButton"/>
+    </children>
+
+</AnchorPane>
