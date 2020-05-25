@@ -4,11 +4,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.Callback;
 import proiect.fis.store.model.Customer;
+import proiect.fis.store.model.databases.CustomersDB;
 
 import java.io.IOException;
 
@@ -80,7 +83,36 @@ public class AccountDetailsPage {
         this.customer = customer ;
     }
 
+    @FXML
+    public void saveChanges(){
+        String customerUsername = username.getText();
+        String customerName = name.getText();
+        String customerPhoneNumber = phoneNumber.getText();
+        String customerAddress = address.getText();
+        String customerEmail = email.getText();
 
+        CustomersDB customersDB = CustomersDB.getInstance();
+        Customer customer = new Customer(customerUsername,customerName,customerEmail,customerPhoneNumber,customerAddress);
+        if(customersDB.updateCustomer(customer)){
+            this.customer.setName(customerName);
+            this.customer.setEmail(customerEmail);
+            this.customer.setAddress(customerAddress);
+            this.customer.setPhone(customerPhoneNumber);
+            Alert alert = new Alert(Alert.AlertType.INFORMATION, "The changes were saved", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+            return ;
+        }
+
+        Alert alert = new Alert(Alert.AlertType.WARNING, "The changes couldn't be saved", ButtonType.OK);
+        alert.showAndWait();
+        if (alert.getResult() == ButtonType.OK) {
+            alert.close();
+        }
+
+    }
 
 
     @FXML
