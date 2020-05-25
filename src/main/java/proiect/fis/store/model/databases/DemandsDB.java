@@ -70,6 +70,18 @@ public class DemandsDB {
         }
     }
 
+    public void deleteDemand(Product product){
+        String name = product.getName();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM " + TABLE_NAME +
+                    "WHERE name = ?");
+            preparedStatement.setString(1,name);
+            preparedStatement.executeUpdate();
+        }catch (SQLException e){
+            return ;
+        }
+    }
+
     public boolean addDemand(Product product) {
         if(searchProduct(product)) {
             return updateProductQuantity(product);
