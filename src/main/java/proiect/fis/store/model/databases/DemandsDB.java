@@ -1,5 +1,6 @@
 package proiect.fis.store.model.databases;
 
+import javafx.collections.ObservableList;
 import proiect.fis.store.model.Product;
 
 import java.sql.*;
@@ -48,6 +49,11 @@ public class DemandsDB {
             //
         }
     }
+
+    public ObservableList<Product> getDemands(){
+        return null;
+    }
+
     public boolean addDemand(Product product) {
         if(searchProduct(product)) {
             return updateProductQuantity(product);
