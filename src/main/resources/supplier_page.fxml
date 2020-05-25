@@ -5,6 +5,20 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.SupplierController">
 
-    <Label layoutX="247.0" layoutY="167.0" text="this is supplier page" />
+    <children>
+        <TableView fx:id="myTable" layoutX="33.0" layoutY="23.0" prefHeight="355.0" prefWidth="341.0">
+            <columns>
+                <TableColumn fx:id="nameColumn" prefWidth="122" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="122" text="Price" />
+                <TableColumn fx:id="quantityColumn" prefWidth="100" text="Quantity" />
+            </columns>
+        </TableView>
+        <Button layoutX="432.0" layoutY="23.0" mnemonicParsing="false"
+                fx:id="acceptDemandsButton"
+                onAction="#acceptDemands"
+                text="Accept Demands" />
+
+
+    </children>
 
 </AnchorPane>
