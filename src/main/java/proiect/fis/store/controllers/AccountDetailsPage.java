@@ -82,6 +82,7 @@ public class AccountDetailsPage {
 
 
 
+
     @FXML
     private void setButtonProperties(){
         String customerName = name.getText();
