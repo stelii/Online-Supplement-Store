@@ -21,8 +21,7 @@ public class OrdersDB {
             COLUMN_DELIVERY_STATUS + " TEXT," + COLUMN_CUSTOMER_NAME + " TEXT" +
             ")";
 
-    public static final String INSERT_PRODUCT = "INSERT INTO " + TABLE_NAME +
-            " VALUES (?,?,?,?,?)";
+    public static final String INSERT_PRODUCT = "INSERT INTO " + TABLE_NAME + " VALUES (?,?,?)";
     private Connection connection;
 
     private static OrdersDB instance = new OrdersDB();

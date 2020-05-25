@@ -5,7 +5,7 @@
 
 <AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.CustomerListController">
    <children>
-      <Button fx:id="backtoMP" layoutX="535.0" layoutY="355.0" mnemonicParsing="false" text="Back" />
+      <Button fx:id="backToMP" onAction="#goToManagerPage" layoutX="535.0" layoutY="355.0" mnemonicParsing="false" text="Back" />
       <TableView fx:id="customerTable" layoutX="14.0" layoutY="36.0" prefHeight="200.0" prefWidth="500.0">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
@@ -15,7 +15,6 @@
             <TableColumn fx:id="addressColumn" prefWidth="100.0" text="Address" />
         </columns>
       </TableView>
-      <TextField fx:id="searchField" alignment="CENTER" layoutX="14.0" layoutY="252.0" prefHeight="31.0" prefWidth="136.0" promptText="Search Here" />
-      <Button layoutX="14.0" layoutY="304.0" mnemonicParsing="false" text="Sort by name" />
+      <TextField fx:id="searchField" alignment="CENTER" layoutX="14.0" layoutY="252.0" onKeyReleased="#searchCustomer" prefHeight="31.0" prefWidth="136.0" promptText="Search here" />
    </children>
 </AnchorPane>

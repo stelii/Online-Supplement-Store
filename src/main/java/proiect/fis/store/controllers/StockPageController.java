@@ -1,7 +1,6 @@
 package proiect.fis.store.controllers;
 
 import javafx.collections.FXCollections;
-
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
 import javafx.fxml.FXML;
@@ -20,11 +19,9 @@ import java.io.IOException;
 import java.util.function.Predicate;
 
 public class StockPageController {
-//    private Product product;
     @FXML
     private TextField filterField;
-  //  @FXML
-    //private Button addToDemands;
+
     @FXML
     private Button backFromStock;
     @FXML
@@ -73,12 +70,28 @@ public class StockPageController {
 
     @FXML
     public boolean backToManagerPage() {
+        Stage stage = (Stage) backFromStock.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
+        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> param) {
+                if (param == ManagerController.class) {
+                    ManagerController controller = new ManagerController();
+                    controller.setData(demandsBucket);
+                    return controller;
+                } else {
+                    try {
+                        return param.newInstance();
+                    } catch (Exception e) {
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
         try {
-            Stage stage = (Stage) backFromStock.getScene().getWindow();
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
-            Parent managerPage = loader.load();
-            Scene ManagerPage = new Scene(managerPage);
-            stage.setScene(ManagerPage);
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            stage.setScene(scene);
             stage.setTitle("Manager Page");
             stage.show();
             return true;
@@ -91,18 +104,21 @@ public class StockPageController {
     @FXML
     public void addToDemandsBucket() {
         Product product = productTable.getSelectionModel().getSelectedItem();
+        for(int i = 0; i < demandsBucket.size(); ++i) {
+            if(demandsBucket.get(i).equals(product)) {
+                demandsBucket.get(i).updateQuantity(product.getQuantity());
+                return;
+            }
+        }
         demandsBucket.add(product);
         System.out.println(product.getName());
     }
 
-//    public void setProduct(Product product) {
-//        this.product = product;
-//    }
-
-//    public void setBucket(ObservableList<Product> bucket) {
-//        this.demandsBucket = bucket;
-  //  }
-
+    public void setData(ObservableList<Product> demandsBucket) {
+        if(demandsBucket != null) {
+            this.demandsBucket = demandsBucket;
+        }
+    }
     @FXML
     public boolean goToDemandsPage() {
         Stage stage = (Stage) goToDemandsPage.getScene().getWindow();
@@ -112,7 +128,7 @@ public class StockPageController {
             public Object call(Class<?> param) {
                 if (param == DemandsPageController.class) {
                     DemandsPageController controller = new DemandsPageController();
-                  controller.setData(demandsBucket);
+                    controller.setData(demandsBucket);
                     return controller;
                 } else {
                     try {
