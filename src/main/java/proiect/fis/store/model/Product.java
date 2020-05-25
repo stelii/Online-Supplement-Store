@@ -37,5 +37,17 @@ public class Product {
         this.price = price;
     }
 
+    @Override
+    public boolean equals(Object obj) {
+        if(obj instanceof Product) {
+            Product product = (Product)obj;
+            return this.getName().equals(product.getName());
+        }
+        return false;
+    }
 
+    public boolean updateQuantity(int quantity) {
+        this.quantity += quantity;
+        return true;
+    }
 }
