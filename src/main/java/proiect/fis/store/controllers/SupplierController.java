@@ -2,13 +2,12 @@ package proiect.fis.store.controllers;
 
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import proiect.fis.store.model.Product;
 import proiect.fis.store.model.Supplier;
 import proiect.fis.store.model.databases.DemandsDB;
+import proiect.fis.store.model.databases.StockDB;
 
 public class SupplierController {
     private Supplier supplier;
@@ -42,6 +41,28 @@ public class SupplierController {
         DemandsDB demandsDB = DemandsDB.getInstance();
         products = demandsDB.getDemands();
         return products;
+    }
+
+    @FXML
+    public void acceptDemands(){
+        StockDB stockDB = StockDB.getInstance();
+        DemandsDB demandsDB = DemandsDB.getInstance();
+
+        for(Product p : demands){
+            int quantity = p.getQuantity();
+            if(stockDB.addQuantity(p,quantity)){
+                demandsDB.deleteDemand(p);
+            }
+        }
+
+        demands.removeAll(demands);
+        myTable.refresh();
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION,"THE PRODUCTS WERE TRANSFERRED", ButtonType.OK);
+        alert.showAndWait();
+        if(alert.getResult() == ButtonType.OK){
+            alert.close();
+        }
     }
 
     public void setSupplier(Supplier supplier){
