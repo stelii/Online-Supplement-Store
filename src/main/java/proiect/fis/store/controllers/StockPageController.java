@@ -1,5 +1,6 @@
 package proiect.fis.store.controllers;
 
+import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -21,7 +22,12 @@ import java.util.function.Predicate;
 public class StockPageController {
     @FXML
     private TextField filterField;
-
+    @FXML
+    private TextField productName;
+    @FXML
+    private TextField productPrice;
+    @FXML
+    private TextField productQuantity;
     @FXML
     private Button backFromStock;
     @FXML
@@ -103,15 +109,34 @@ public class StockPageController {
 
     @FXML
     public void addToDemandsBucket() {
-        Product product = productTable.getSelectionModel().getSelectedItem();
-        for(int i = 0; i < demandsBucket.size(); ++i) {
-            if(demandsBucket.get(i).equals(product)) {
-                demandsBucket.get(i).updateQuantity(product.getQuantity());
-                return;
+        if (!productName.getText().isEmpty() && !productPrice.getText().isEmpty() && !productQuantity.getText().isEmpty()) {
+            String name = productName.getText();
+            double price = Double.parseDouble(productPrice.getText());
+            int quantity = Integer.parseInt(productQuantity.getText());
+            Product createdProduct = new Product(name, price, quantity);
+            if (!demandsBucket.contains(createdProduct)) {
+                demandsBucket.add(createdProduct);
+            }else{
+                for (int i = 0; i < demandsBucket.size(); ++i) {
+                    if (demandsBucket.get(i).equals(createdProduct)) {
+                        demandsBucket.get(i).updateQuantity(createdProduct.getQuantity());
+                        return;
+                    }
+                }
             }
         }
-        demandsBucket.add(product);
-        System.out.println(product.getName());
+
+        Product product = productTable.getSelectionModel().getSelectedItem();
+        if (product != null) {
+            for (int i = 0; i < demandsBucket.size(); ++i) {
+                if (demandsBucket.get(i).equals(product)) {
+                    demandsBucket.get(i).updateQuantity(product.getQuantity());
+                    return;
+                }
+            }
+            demandsBucket.add(product);
+            // System.out.println(product.getName());
+        }
     }
 
     public void setData(ObservableList<Product> demandsBucket) {
