@@ -13,7 +13,8 @@ public class StockDB {
     public static final String CONNECTION_STRING = "jdbc:sqlite:" + filepath;
 
     public static final String WITHDRAW_QUANTITY = "UPDATE " + TABLE_NAME + " SET quantity = quantity - ? WHERE name = ?";
-    public static final String ADD_QUANTITY = "";
+    public static final String ADD_QUANTITY = "UPDATE " +
+            TABLE_NAME + " SET quantity = quantity + ? WHERE name = ?";
     private Connection connection;
     private static StockDB instance = new StockDB();
     private StockDB() {}
