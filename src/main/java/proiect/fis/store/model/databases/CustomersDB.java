@@ -111,7 +111,13 @@ public class CustomersDB {
             if (resultSet.next()) {
                 String name = resultSet.getString(COLUMN_NAME);
                 int password_changed = resultSet.getInt(COLUMN_PASSWORD_STATUS);
+                String email = resultSet.getString(COLUMN_EMAIL);
+                String address = resultSet.getString(COLUMN_ADDRESS);
+                String phoneNumber = resultSet.getString(COLUMN_PHONE);
                 customer = new Customer(username, name, encryptedPassword, password_changed);
+                customer.setPhone(phoneNumber);
+                customer.setAddress(address);
+                customer.setEmail(email);
             }
             return customer;
         } catch (SQLException e) {
