@@ -41,7 +41,7 @@ public class CustomersDB {
             COLUMN_PASSWORD_STATUS + " = 1 WHERE " + COLUMN_USERNAME + "= ?";
 
     public static final String UPDATE_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_NAME + " = ?," +
-        COLUMN_EMAIL + " = ?," + COLUMN_EMAIL + " = ?," + COLUMN_PHONE + " = ?" + " WHERE " + COLUMN_USERNAME +
+        COLUMN_EMAIL + " = ?," + COLUMN_ADDRESS + " = ?," + COLUMN_PHONE + " = ?" + " WHERE " + COLUMN_USERNAME +
             " = ?";
 
 
