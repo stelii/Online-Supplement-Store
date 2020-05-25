@@ -36,7 +36,7 @@ public class StockDB {
 
     }
 
-    public ObservableList<Product> returnProducts(){
+    public ObservableList<Product> getProducts(){
         ObservableList<Product> products = FXCollections.observableArrayList();
         try{
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + TABLE_NAME );
