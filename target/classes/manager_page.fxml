@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.ManagerController">
+    <children>
+        <Label layoutX="62.0" layoutY="37.0" text="Welcome Manager">
+            <font>
+                <Font size="57.0" />
+            </font>
+        </Label>
+        <Button fx:id="clientsPageButton" onAction="#goToClientsPage" layoutX="62.0" layoutY="185.0" mnemonicParsing="false" text="View Clients" />
+        <Button fx:id="demandsPageButton" onAction="#goToDemandsPage" layoutX="235.0" layoutY="185.0" mnemonicParsing="false" text="View Demands" />
+        <Button fx:id="stockPageButton" layoutX="442.0" layoutY="185.0" mnemonicParsing="false" onAction="#goToStockPage" text="View Stock" />
+        <Button fx:id="logoutButton" onAction="#logout" layoutX="456.0" layoutY="334.0" mnemonicParsing="false" text="Logout" />
+    </children>
+</AnchorPane>
