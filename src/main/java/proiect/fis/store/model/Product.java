@@ -11,7 +11,7 @@ public class Product {
         this.quantity = quantity;
     }
 
-
+    public void updateQuantity(int quantity) {this.quantity += quantity;}
 
     public String getName() {
         return name;

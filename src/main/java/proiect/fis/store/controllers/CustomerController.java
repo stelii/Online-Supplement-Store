@@ -96,6 +96,17 @@ public class CustomerController {
             }
             return ;
         }
+
+        if (product != null) {
+            for (int i = 0; i < bucket.size(); ++i) {
+                if (bucket.get(i).equals(product)) {
+                    bucket.get(i).updateQuantity(product.getQuantity());
+                    return;
+                }
+            }
+                bucket.add(product);
+            // System.out.println(product.getName());
+        }
         product.setQuantity(1);
         bucket.add(product);
         System.out.println(product.getName());
