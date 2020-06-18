@@ -24,6 +24,7 @@ public class OrdersDB {
             COLUMN_DELIVERY_STATUS + " TEXT," + COLUMN_CUSTOMER_NAME + " TEXT" +
             ")";
 
+    public static final String INSERT_PRODUCT = "INSERT INTO " + TABLE_NAME + " VALUES (?,?,?)";
     private Connection connection;
 
     private static OrdersDB instance = new OrdersDB();
@@ -57,5 +58,52 @@ public class OrdersDB {
             return false;
         }
     }
-    
+
+
+    public boolean add(Order order){
+        String username = order.getUsername();
+        String productName = order.getName();
+        double price = order.getPrice();
+        int quantity = order.getQuantity();
+        String deliveryStatus = order.getDeliveryStatus();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(INSERT_PRODUCT)){
+            preparedStatement.setString(1,productName);
+            preparedStatement.setDouble(2,price);
+            preparedStatement.setInt(3,quantity);
+            preparedStatement.setString(4,deliveryStatus);
+            preparedStatement.setString(5,username);
+
+            int rez = preparedStatement.executeUpdate();
+            return rez > 0;
+        }catch (SQLException e){
+            //
+            return false;
+        }
+    }
+
+    public ObservableList<Order> getOrders(Customer customer){
+        String username = customer.getUsername();
+        System.out.println(username);
+        ObservableList<Order> orders = FXCollections.observableArrayList();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " +
+                    TABLE_NAME + " WHERE customer_name = ?");
+            preparedStatement.setString(1,username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString(1);
+                double price = resultSet.getDouble(2);
+                int quantity = resultSet.getInt(3);
+                String deliveryStatus = resultSet.getString(4);
+                Order order = new Order(name,price,quantity,deliveryStatus,username);
+                orders.add(order);
+            }
+            return orders;
+        }catch (SQLException e){
+            //
+            return null ;
+        }
+    }
+
 }
