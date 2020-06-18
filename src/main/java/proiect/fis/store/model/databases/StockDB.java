@@ -13,6 +13,10 @@ public class StockDB {
     public static final String CONNECTION_STRING = "jdbc:sqlite:" + filepath;
 
     public static final String WITHDRAW_QUANTITY = "UPDATE " + TABLE_NAME + " SET quantity = quantity - ? WHERE name = ?";
+    public static final String ADD_QUANTITY = "UPDATE " +
+            TABLE_NAME + " SET quantity = quantity + ? WHERE name = ?";
+    public static final String ADD_PRODUCT = "INSERT INTO " + TABLE_NAME + " VALUES (?,?,?) ";
+    public static final String SEARCH_PRODUCT = "SELECT * FROM " + TABLE_NAME + " WHERE name = ?";
 
     private Connection connection;
     private static StockDB instance = new StockDB();
@@ -68,6 +72,55 @@ public class StockDB {
             return false;
         }
     }
+
+    public boolean updateProduct(Product product){
+        String name = product.getName();
+        int quantity = product.getQuantity();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(ADD_QUANTITY)){
+            preparedStatement.setInt(1,quantity);
+            preparedStatement.setString(2,name);
+            int rez = preparedStatement.executeUpdate();
+            return rez > 0 ;
+        }catch (SQLException e){
+            //
+            return false;
+        }
+    }
+
+    public boolean addProduct(Product product){
+        String name = product.getName();
+        int quantity = product.getQuantity();
+        double price = product.getPrice();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(ADD_PRODUCT)){
+            preparedStatement.setString(1,name);
+            preparedStatement.setDouble(2,price);
+            preparedStatement.setInt(3,quantity);
+            int result = preparedStatement.executeUpdate();
+            return result > 0 ;
+        }catch (SQLException e){
+            return false;
+        }
+
+    }
+
+    public Product getProduct(Product product){
+        String name = product.getName();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_PRODUCT)){
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return product;
+            }
+
+            return null;
+        }catch (SQLException e){
+            return null ;
+        }
+    }
+
 
     public void closeConnection () {
         try {

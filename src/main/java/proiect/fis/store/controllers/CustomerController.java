@@ -131,4 +131,33 @@ public class CustomerController {
 
     }
 
+    public void viewAccountDetails(){
+        Stage stage = (Stage)viewBucketButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/account_details_page.fxml"));
+        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> param) {
+                if(param == AccountDetailsController.class){
+                    AccountDetailsController controller = new AccountDetailsController();
+                    controller.setCustomer(customer);
+                    return controller;
+                }else{
+                    try{
+                        return param.newInstance();
+                    }catch (Exception e){
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        try{
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
 }

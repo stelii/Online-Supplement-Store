@@ -40,6 +40,11 @@ public class CustomersDB {
     public static final String CHANGE_PASSWOWRD_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_PASSWORD + " = ?," +
             COLUMN_PASSWORD_STATUS + " = 1 WHERE " + COLUMN_USERNAME + "= ?";
 
+    public static final String UPDATE_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_NAME + " = ?," +
+        COLUMN_EMAIL + " = ?," + COLUMN_ADDRESS + " = ?," + COLUMN_PHONE + " = ?" + " WHERE " + COLUMN_USERNAME +
+            " = ?";
+
+
     private Connection connection;
     private PreparedStatement insertCustomer ;
     private static CustomersDB instance = new CustomersDB();
@@ -106,7 +111,13 @@ public class CustomersDB {
             if (resultSet.next()) {
                 String name = resultSet.getString(COLUMN_NAME);
                 int password_changed = resultSet.getInt(COLUMN_PASSWORD_STATUS);
+                String email = resultSet.getString(COLUMN_EMAIL);
+                String address = resultSet.getString(COLUMN_ADDRESS);
+                String phoneNumber = resultSet.getString(COLUMN_PHONE);
                 customer = new Customer(username, name, encryptedPassword, password_changed);
+                customer.setPhone(phoneNumber);
+                customer.setAddress(address);
+                customer.setEmail(email);
             }
             return customer;
         } catch (SQLException e) {
@@ -127,6 +138,26 @@ public class CustomersDB {
         } catch (SQLException e) {
             System.out.println("Error on database " + e.getMessage());
             e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updateCustomer(Customer customer){
+        String username = customer.getUsername();
+        String name = customer.getName();
+        String email = customer.getEmail();
+        String phoneNumber = customer.getPhone();
+        String address = customer.getAddress();
+
+        try(PreparedStatement updateCustomer = connection.prepareStatement(UPDATE_CUSTOMER)){
+            updateCustomer.setString(1,name);
+            updateCustomer.setString(2,email);
+            updateCustomer.setString(3,address);
+            updateCustomer.setString(4,phoneNumber);
+            updateCustomer.setString(5,username);
+            return updateCustomer.executeUpdate() > 0;
+        }catch (SQLException e){
+            //
             return false;
         }
     }
