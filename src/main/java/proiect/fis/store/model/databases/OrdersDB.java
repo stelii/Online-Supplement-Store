@@ -1,5 +1,8 @@
 package proiect.fis.store.model.databases;
 
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.Order;
 
 import java.sql.*;
@@ -75,6 +78,30 @@ public class OrdersDB {
         }catch (SQLException e){
             //
             return false;
+        }
+    }
+
+    public ObservableList<Order> getOrders(Customer customer){
+        String username = customer.getUsername();
+        System.out.println(username);
+        ObservableList<Order> orders = FXCollections.observableArrayList();
+        try{
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " +
+                    TABLE_NAME + " WHERE customer_name = ?");
+            preparedStatement.setString(1,username);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while(resultSet.next()){
+                String name = resultSet.getString(1);
+                double price = resultSet.getDouble(2);
+                int quantity = resultSet.getInt(3);
+                String deliveryStatus = resultSet.getString(4);
+                Order order = new Order(name,price,quantity,deliveryStatus,username);
+                orders.add(order);
+            }
+            return orders;
+        }catch (SQLException e){
+            //
+            return null ;
         }
     }
 }
