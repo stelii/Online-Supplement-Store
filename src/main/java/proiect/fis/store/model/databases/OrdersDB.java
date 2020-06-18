@@ -1,9 +1,11 @@
 package proiect.fis.store.model.databases;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import proiect.fis.store.model.Customer;
+import proiect.fis.store.model.Order;
+
+import java.sql.*;
 
 public class OrdersDB {
     public static final String DB_NAME = "store.db";
@@ -55,4 +57,5 @@ public class OrdersDB {
             return false;
         }
     }
+    
 }

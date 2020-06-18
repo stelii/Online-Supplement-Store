@@ -39,6 +39,9 @@ public class CustomerController {
     private Button viewBucketButton;
 
     @FXML
+    private  Button deliveryStatusButton;
+
+    @FXML
     private TextField searchBar ;
 
 
@@ -83,6 +86,35 @@ public class CustomerController {
     }
     public void setBucket(ObservableList<Product> bucket){
         this.bucket = bucket ;
+    }
+
+    public void goToDeliveryStatusPage() {
+        Stage stage = (Stage)deliveryStatusButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/delivery_page.fxml"));
+        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> param) {
+                if(param == DeliveryStatusController.class){
+                    DeliveryStatusController controller = new DeliveryStatusController();
+                    controller.setCustomer(customer);
+                    return controller;
+                }else{
+                    try{
+                        return param.newInstance();
+                    }catch (Exception e){
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        try{
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     @FXML
