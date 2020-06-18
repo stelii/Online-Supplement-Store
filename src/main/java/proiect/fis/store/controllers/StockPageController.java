@@ -127,6 +127,7 @@ public class StockPageController {
         }
 
         Product product = productTable.getSelectionModel().getSelectedItem();
+        product.setQuantity(15);
         if (product != null) {
             for (int i = 0; i < demandsBucket.size(); ++i) {
                 if (demandsBucket.get(i).equals(product)) {
