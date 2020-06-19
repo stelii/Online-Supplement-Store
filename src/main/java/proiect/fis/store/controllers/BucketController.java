@@ -1,7 +1,6 @@
 package proiect.fis.store.controllers;
 
 import javafx.collections.ObservableList;
-import javafx.embed.swing.JFXPanel;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
