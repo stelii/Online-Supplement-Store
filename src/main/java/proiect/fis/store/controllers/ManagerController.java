@@ -62,34 +62,6 @@ public class ManagerController {
 
     @FXML
     public boolean goToDemandsPage() {
-//        Stage stage = (Stage)viewBucketButton.getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/bucket_page.fxml"));
-//        loader.setControllerFactory(new Callback<Class<?>, Object>() {
-//            @Override
-//            public Object call(Class<?> param) {
-//                if(param == BucketController.class){
-//                    BucketController controller = new BucketController();
-//                    controller.setData(customer,bucket);
-//                    return controller;
-//                }else{
-//                    try{
-//                        return param.newInstance();
-//                    }catch (Exception e){
-//                        throw new RuntimeException(e);
-//                    }
-//                }
-//            }
-//        });
-//        try{
-//            Parent root = loader.load();
-//            Scene scene = new Scene(root);
-//            stage.setScene(scene);
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
         Stage stage = (Stage)demandsPageButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/demands_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
@@ -123,19 +95,7 @@ public class ManagerController {
 
     @FXML
     public boolean goToStockPage() {
-//        try {
-//            Stage stage = (Stage) stockPageButton.getScene().getWindow();
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock_page.fxml"));
-//            Parent viewStock = loader.load();
-//            Scene viewStockScene = new Scene(viewStock);
-//            stage.setScene(viewStockScene);
-//            stage.setTitle("View Stock");
-//            stage.show();
-//            return true;
-//        } catch (IOException e) {
-//            System.out.println("Error");
-//            return false;
-//        }
+
         Stage stage = (Stage) stockPageButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
@@ -162,7 +122,7 @@ public class ManagerController {
             stage.show();
             return true;
         }catch (IOException e) {
-            System.out.println(e.getStackTrace());
+            e.printStackTrace();
             return false;
         }
 
