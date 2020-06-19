@@ -37,7 +37,6 @@ public class AccountDetailsController {
     private Button backToMainButton;
 
     public void initialize(){
-        System.out.println(customer.getAddress());
         username.setText(customer.getUsername());
         name.setText(customer.getName());
         email.setText(customer.getEmail());
