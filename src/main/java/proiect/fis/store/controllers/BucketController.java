@@ -64,21 +64,27 @@ public class BucketController {
         OrdersDB ordersDB = OrdersDB.getInstance();
         StockDB stockDB = StockDB.getInstance();
 
-        for(int i = 0 ; i < productsToBeOrdered.size(); i++){
-            String name = productsToBeOrdered.get(i).getName();
-            int quantity = productsToBeOrdered.get(i).getQuantity();
-            double price = productsToBeOrdered.get(i).getPrice();
+        for(Product p : productsToBeOrdered){
+            String name = p.getName();
+            int quantity = p.getQuantity();
+            double price = p.getPrice();
             String username = customer.getUsername();
             String deliveryStatus = deliveryRandom();
-
             Order order = new Order(name,price,quantity,deliveryStatus,username);
 
-            if(ordersDB.add(order)){
-                stockDB.withdrawQuantity(productsToBeOrdered.get(i),quantity);
+            Order searchedOrder = ordersDB.getOrder(order);
+            if(searchedOrder != null){
+                ordersDB.updateOrder(order);
             }else{
-                //
+                if(ordersDB.add(order)){
+                    stockDB.withdrawQuantity(p,quantity);
+                }
             }
+
         }
+
+        bucketList.removeAll(bucketList);
+        myTable.refresh();
     }
 
     public void setData (Customer customer, ObservableList<Product> bucket) {

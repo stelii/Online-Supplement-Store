@@ -92,6 +92,14 @@ public class CustomerController {
     @FXML
     public void addToBucket() {
         Product product = myTable.getSelectionModel().getSelectedItem();
+        if(product == null){
+            Alert alert = new Alert(Alert.AlertType.WARNING, "PLEASE SELECT A PRODUCT", ButtonType.OK);
+            alert.showAndWait();
+            if (alert.getResult() == ButtonType.OK) {
+                alert.close();
+            }
+            return;
+        }
         if (product.getQuantity() == 0) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "THE PRODUCT IS NOT AVAILABLE", ButtonType.OK);
             alert.showAndWait();
