@@ -137,6 +137,14 @@ public class StockPageController {
             demandsBucket.add(product);
             // System.out.println(product.getName());
         }
+
+        clearInputs();
+    }
+
+    private void clearInputs(){
+        productName.clear();
+        productPrice.clear();
+        productQuantity.clear();
     }
 
     public void setData(ObservableList<Product> demandsBucket) {
