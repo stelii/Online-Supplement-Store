@@ -19,16 +19,16 @@ import java.io.IOException;
 import java.util.function.Predicate;
 
 public class CustomerController {
-    private Customer customer ;
+    private Customer customer;
 
     @FXML
     private TableView<Product> myTable;
     @FXML
-    private TableColumn<Product,String> nameColumn ;
+    private TableColumn<Product, String> nameColumn;
     @FXML
-    private TableColumn<Product,Integer> quantityColumn ;
+    private TableColumn<Product, Integer> quantityColumn;
     @FXML
-    private TableColumn<Product,Double> priceColumn ;
+    private TableColumn<Product, Double> priceColumn;
 
 
     private ObservableList<Product> bucket = FXCollections.observableArrayList();
@@ -42,17 +42,17 @@ public class CustomerController {
     private Button viewBucketButton;
 
     @FXML
-    private TextField searchBar ;
+    private TextField searchBar;
 
 
     private FilteredList<Product> filteredProducts = new FilteredList<>(getProductsList(), new Predicate<Product>() {
         @Override
         public boolean test(Product product) {
-            return true ;
+            return true;
         }
     });
 
-    public void initialize(){
+    public void initialize() {
 
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("price"));
@@ -62,8 +62,8 @@ public class CustomerController {
 
     }
 
-    private ObservableList<Product> getProductsList(){
-        ObservableList<Product> products ;
+    private ObservableList<Product> getProductsList() {
+        ObservableList<Product> products;
 
         StockDB stockDB = StockDB.getInstance();
         products = stockDB.getProducts();
@@ -71,59 +71,68 @@ public class CustomerController {
         return products;
     }
 
-    public void searchProduct(){
+    public void searchProduct() {
         filteredProducts.setPredicate(new Predicate<Product>() {
             @Override
             public boolean test(Product product) {
-                boolean rezult =  product.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim());
-                return rezult ;
+                boolean rezult = product.getName().toLowerCase().contains(searchBar.getText().toLowerCase().trim());
+                return rezult;
             }
         });
     }
 
-    public void setCustomer(Customer customer){
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
-    public void setBucket(ObservableList<Product> bucket){
-        this.bucket = bucket ;
+
+    public void setBucket(ObservableList<Product> bucket) {
+        this.bucket = bucket;
     }
 
     @FXML
-    public void addToBucket(){
+    public void addToBucket() {
         Product product = myTable.getSelectionModel().getSelectedItem();
-        if(product.getQuantity() == 0) {
-            Alert alert = new Alert(Alert.AlertType.WARNING,"THE PRODUCT IS NOT AVAILABLE",ButtonType.OK);
+        if (product.getQuantity() == 0) {
+            Alert alert = new Alert(Alert.AlertType.WARNING, "THE PRODUCT IS NOT AVAILABLE", ButtonType.OK);
             alert.showAndWait();
-            if(alert.getResult() == ButtonType.OK){
+            if (alert.getResult() == ButtonType.OK) {
                 alert.close();
             }
-            return ;
+            return;
         }
-        product.setQuantity(1);
-        bucket.add(product);
-        System.out.println(product.getName());
+
+        if (bucket.contains(product)) {
+            for (Product searchProduct : bucket) {
+                if (product.getName().equals(searchProduct.getName()))
+                    searchProduct.updateQuantity(product.getQuantity());
+                break;
+            }
+        }else{
+            product.setQuantity(1);
+            bucket.add(product);
+        }
     }
 
-    public void viewDeliveryPage(){
-        Stage stage = (Stage)viewBucketButton.getScene().getWindow();
+    public void viewDeliveryPage() {
+        Stage stage = (Stage) viewBucketButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/delivery_status_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {
-                if(param == DeliveryStatusController.class){
+                if (param == DeliveryStatusController.class) {
                     DeliveryStatusController controller = new DeliveryStatusController();
                     controller.setCustomer(customer);
                     return controller;
-                }else{
-                    try{
+                } else {
+                    try {
                         return param.newInstance();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 }
             }
         });
-        try{
+        try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -133,26 +142,26 @@ public class CustomerController {
         }
     }
 
-    public void viewBucketPage(){
-        Stage stage = (Stage)viewBucketButton.getScene().getWindow();
+    public void viewBucketPage() {
+        Stage stage = (Stage) viewBucketButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/bucket_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {
-                if(param == BucketController.class){
+                if (param == BucketController.class) {
                     BucketController controller = new BucketController();
-                    controller.setData(customer,bucket);
+                    controller.setData(customer, bucket);
                     return controller;
-                }else{
-                    try{
+                } else {
+                    try {
                         return param.newInstance();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 }
             }
         });
-        try{
+        try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
@@ -163,26 +172,26 @@ public class CustomerController {
 
     }
 
-    public void viewAccountDetails(){
-        Stage stage = (Stage)viewBucketButton.getScene().getWindow();
+    public void viewAccountDetails() {
+        Stage stage = (Stage) viewBucketButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/account_details_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {
-                if(param == AccountDetailsController.class){
+                if (param == AccountDetailsController.class) {
                     AccountDetailsController controller = new AccountDetailsController();
                     controller.setCustomer(customer);
                     return controller;
-                }else{
-                    try{
+                } else {
+                    try {
                         return param.newInstance();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 }
             }
         });
-        try{
+        try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
