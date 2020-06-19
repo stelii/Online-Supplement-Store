@@ -22,7 +22,10 @@
       <Button fx:id="viewBucketButton" layoutX="514.0" layoutY="185.0" mnemonicParsing="false" onAction="#viewBucketPage" text="View bucket" />
        <TextField fx:id="searchBar" layoutX="514.0" layoutY="23.0" onKeyReleased="#searchProduct" promptText="Search here" />
 
-      <Button layoutX="514.0" layoutY="134.0" mnemonicParsing="false" text="View Delivery status" />
+      <Button layoutX="514.0" layoutY="134.0" mnemonicParsing="false"
+              fx:id="viewDeliveryPageButton"
+              onAction="#viewDeliveryPage"
+              text="View Delivery status" />
 
       <Button onAction="#viewAccountDetails" layoutX="514.0" layoutY="77.0" mnemonicParsing="false" text="View Account details" />
        
