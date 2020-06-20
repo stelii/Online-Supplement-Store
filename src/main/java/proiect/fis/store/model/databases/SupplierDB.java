@@ -125,13 +125,16 @@ public class SupplierDB {
 
 
 
-    public void closeConnection () {
+    public boolean closeConnection () {
         try {
             if (connection!=null)
                 connection.close();
+
+            return true ;
         }
         catch (SQLException e) {
             //
+            return false ;
         }
     }
 }
