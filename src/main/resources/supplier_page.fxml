@@ -3,20 +3,18 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.SupplierController">
+<AnchorPane maxHeight="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.SupplierController">
 
     <children>
-        <TableView fx:id="myTable" layoutX="33.0" layoutY="23.0" prefHeight="355.0" prefWidth="341.0">
+        <TableView fx:id="myTable" layoutX="125.0" layoutY="124.0" prefHeight="350.0" prefWidth="450.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" stylesheets="@tableviewCSS.css">
             <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="122" text="Name" />
-                <TableColumn fx:id="priceColumn" prefWidth="122" text="Price" />
-                <TableColumn fx:id="quantityColumn" prefWidth="100" text="Quantity" />
+                <TableColumn fx:id="nameColumn" prefWidth="161.39998626708984" style="-fx-text-fill: #B670D2;" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="141.00003051757812" style="-fx-text-fill: B670D2;" text="Price" />
+                <TableColumn fx:id="quantityColumn" prefWidth="147.00003051757812" text="Quantity" />
             </columns>
         </TableView>
-        <Button layoutX="432.0" layoutY="23.0" mnemonicParsing="false"
-                fx:id="acceptDemandsButton"
-                onAction="#acceptDemands"
-                text="Accept Demands" />
+        <Button fx:id="acceptDemandsButton" layoutX="215.0" layoutY="504.0" mnemonicParsing="false" onAction="#acceptDemands" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Accept Demands" />
+      <Label layoutX="110.0" layoutY="48.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="SUPPLIER'S PAGE - DEMANDS" />
 
 
     </children>

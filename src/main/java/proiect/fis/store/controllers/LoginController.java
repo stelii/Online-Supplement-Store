@@ -189,6 +189,7 @@ public class LoginController {
                 });
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
+                scene.getStylesheets().add("/tableviewCSS.css");
                 stage.setScene(scene);
                 stage.show();
                 return true;

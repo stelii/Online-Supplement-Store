@@ -1,24 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="proiect.fis.store.controllers.DeliveryStatusController">
+<AnchorPane maxHeight="-Infinity" minHeight="650.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.DeliveryStatusController">
     <children>
-        <TableView fx:id="myTable" layoutX="31.0" layoutY="30.0" prefHeight="350.0" prefWidth="400.0">
+        <TableView fx:id="myTable" layoutX="155.0" layoutY="124.0" prefHeight="350.0" prefWidth="450.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" stylesheets="@tableviewCSS.css">
             <columns>
-                <TableColumn fx:id="nameColumn" prefWidth="120.0" text="Name" />
-                <TableColumn fx:id="priceColumn" prefWidth="70.0" text="Price" />
-                <TableColumn fx:id="quantityColumn" prefWidth="80.0" text="Quantity" />
-                <TableColumn fx:id="statusColumn" prefWidth="135.0" text="Status" />
+                <TableColumn fx:id="nameColumn" prefWidth="120.0" style="-fx-text-fill: #B670D2;" text="Name" />
+                <TableColumn fx:id="priceColumn" prefWidth="96.39996337890625" style="-fx-text-fill: #B670D2;" text="Price" />
+                <TableColumn fx:id="quantityColumn" prefWidth="120.39996337890625" style="-fx-text-fill: #B670D2;" text="Quantity" />
+                <TableColumn fx:id="statusColumn" prefWidth="110.800048828125" text="Status" />
             </columns>
         </TableView>
-        <Button layoutX="495.0" layoutY="340.0" mnemonicParsing="false"
-                fx:id="backToMainButton" onAction="#backToMain"
-                text="Back to Main" />
+        <Button fx:id="backToMainButton" layoutX="226.0" layoutY="528.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back to Main" />
+      <Label layoutX="218.0" layoutY="25.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="DELIVERY STATUS" />
 
 
     </children>

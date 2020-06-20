@@ -74,6 +74,7 @@ public class BucketController {
             Order order = new Order(name,price,quantity,deliveryStatus,username);
 
             if(ordersDB.add(order)){
+                System.out.println("ok");
                 stockDB.withdrawQuantity(productsToBeOrdered.get(i),quantity);
             }else{
                 //

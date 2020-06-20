@@ -51,6 +51,7 @@ public class ManagerController {
             Parent cp = loader.load();
             Scene scene = new Scene(cp);
             stage.setScene(scene);
+            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("View Clients");
             stage.show();
             return true;
@@ -83,6 +84,7 @@ public class ManagerController {
 //        try{
 //            Parent root = loader.load();
 //            Scene scene = new Scene(root);
+       // scene.getStylesheets().add("/tableviewCSS.css");
 //            stage.setScene(scene);
 //            stage.show();
 //        } catch (IOException e) {
@@ -112,6 +114,7 @@ public class ManagerController {
             Parent dp = loader.load();
             Scene scene = new Scene(dp);
             stage.setScene(scene);
+            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("View Demands");
             stage.show();
             return true;
@@ -158,6 +161,7 @@ public class ManagerController {
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             stage.setScene(scene);
+            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("Stock Page");
             stage.show();
             return true;

@@ -41,6 +41,8 @@ public class CustomerController {
     @FXML
     private TextField searchBar ;
 
+    @FXML
+    private Button viewDeliveryStatusButton;
 
     private FilteredList<Product> filteredProducts = new FilteredList<>(getProductsList(), new Predicate<Product>() {
         @Override
@@ -76,6 +78,35 @@ public class CustomerController {
                 return rezult ;
             }
         });
+    }
+
+    public void goToDeliveryStatus () {
+        Stage stage = (Stage)viewDeliveryStatusButton.getScene().getWindow();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/delivery_status_page.fxml"));
+        loader.setControllerFactory(new Callback<Class<?>, Object>() {
+            @Override
+            public Object call(Class<?> param) {
+                if(param == DeliveryStatusController.class){
+                    DeliveryStatusController controller = new DeliveryStatusController();
+                    controller.setCustomer(customer);
+                    return controller;
+                }else{
+                    try{
+                        return param.newInstance();
+                    }catch (Exception e){
+                        throw new RuntimeException(e);
+                    }
+                }
+            }
+        });
+        try{
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void setCustomer(Customer customer){
@@ -123,6 +154,7 @@ public class CustomerController {
         try{
             Parent root = loader.load();
             Scene scene = new Scene(root);
+            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {

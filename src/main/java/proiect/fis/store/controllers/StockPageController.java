@@ -169,6 +169,7 @@ public class StockPageController {
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             stage.setScene(scene);
+            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("Demands Page");
             stage.show();
             return true;

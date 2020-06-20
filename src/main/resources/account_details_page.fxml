@@ -1,37 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="proiect.fis.store.controllers.AccountDetailsController"
-            prefHeight="400.0" prefWidth="600.0">
+<AnchorPane maxHeight="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.AccountDetailsController">
 
     <children>
-        <Label layoutX="42.0" layoutY="41.0" text="Username :" />
-        <TextField fx:id="username" layoutX="151.0" layoutY="37.0" />
-        <Label layoutX="42.0" layoutY="85.0" text="Name :" />
-        <TextField fx:id="name" layoutX="151.0" layoutY="81.0"
-                   onKeyReleased="#setButtonProperties"/>
+        <Label layoutX="159.0" layoutY="132.0" prefWidth="113.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Username :" />
+        <TextField fx:id="username" layoutX="310.0" layoutY="129.0" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-text-fill: #B670D2; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
+        <Label layoutX="159.0" layoutY="178.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Name :" />
+        <TextField fx:id="name" layoutX="310.0" layoutY="175.0" onKeyReleased="#setButtonProperties" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-text-fill: #B670D2; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
 
-        <Label layoutX="42.0" layoutY="127.0" text="Email :" />
-        <TextField fx:id="email" layoutX="151.0" layoutY="123.0" />
-        <Label layoutX="42.0" layoutY="172.0" text="Phone number :" />
-        <TextField fx:id="phoneNumber" layoutX="151.0" layoutY="168.0" />
-        <Label layoutX="46.0" layoutY="219.0" text="Addres :" />
-        <TextField fx:id="address" layoutX="151.0" layoutY="215.0" />
+        <Label layoutX="159.0" layoutY="226.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Email :" />
+        <TextField fx:id="email" layoutX="310.0" layoutY="223.0" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-text-fill: #B670D2; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
+        <Label layoutX="159.0" layoutY="268.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Phone number :" />
+        <TextField fx:id="phoneNumber" layoutX="310.0" layoutY="266.0" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-text-fill: #B670D2; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
+        <Label layoutX="159.0" layoutY="315.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Addres :" />
+        <TextField fx:id="address" layoutX="310.0" layoutY="313.0" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-text-fill: #B670D2; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
 
 
-        <Button layoutX="151.0" layoutY="265.0" mnemonicParsing="false" text="Save changes"
-                onAction="#saveChanges"
-                fx:id="saveChangesButton"/>
-        <Button layoutX="490.0" layoutY="350.0" mnemonicParsing="false" text="Back To Main"
-                onAction="#backToMain"
-                fx:id="backToMainButton"/>
+        <Button fx:id="saveChangesButton" layoutX="174.0" layoutY="420.0" mnemonicParsing="false" onAction="#saveChanges" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-text-fill: #B670D2; -fx-border-color: #B670D2; -fx-border-radius: 20;" text="Save changes" />
+        <Button fx:id="backToMainButton" layoutX="174.0" layoutY="471.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-text-fill: #B670D2; -fx-border-color: #B670D2; -fx-border-radius: 20;" text="Back To Main" />
+      <Label layoutX="158.0" layoutY="42.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="YOUR ACCOUNT" />
     </children>
 
 </AnchorPane>
