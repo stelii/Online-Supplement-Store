@@ -1,6 +1,5 @@
 package proiect.fis.store.controllers;
 
-import javafx.beans.property.IntegerProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -8,7 +7,10 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.util.Callback;
@@ -16,7 +18,6 @@ import proiect.fis.store.model.Product;
 import proiect.fis.store.model.databases.StockDB;
 
 import java.io.IOException;
-
 import java.util.function.Predicate;
 
 public class StockPageController {
@@ -116,7 +117,7 @@ public class StockPageController {
             Product createdProduct = new Product(name, price, quantity);
             if (!demandsBucket.contains(createdProduct)) {
                 demandsBucket.add(createdProduct);
-            }else{
+            } else {
                 for (int i = 0; i < demandsBucket.size(); ++i) {
                     if (demandsBucket.get(i).equals(createdProduct)) {
                         demandsBucket.get(i).updateQuantity(createdProduct.getQuantity());
@@ -124,6 +125,7 @@ public class StockPageController {
                     }
                 }
             }
+            return;
         }
 
         Product product = productTable.getSelectionModel().getSelectedItem();
@@ -136,23 +138,23 @@ public class StockPageController {
                 }
             }
             demandsBucket.add(product);
-            // System.out.println(product.getName());
         }
 
         clearInputs();
     }
 
-    private void clearInputs(){
+    private void clearInputs() {
         productName.clear();
         productPrice.clear();
         productQuantity.clear();
     }
 
     public void setData(ObservableList<Product> demandsBucket) {
-        if(demandsBucket != null) {
+        if (demandsBucket != null) {
             this.demandsBucket = demandsBucket;
         }
     }
+
     @FXML
     public boolean goToDemandsPage() {
         Stage stage = (Stage) goToDemandsPage.getScene().getWindow();
@@ -177,6 +179,7 @@ public class StockPageController {
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             stage.setScene(scene);
+            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("Demands Page");
             stage.show();
             return true;

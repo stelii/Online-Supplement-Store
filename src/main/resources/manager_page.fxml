@@ -1,19 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.ManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.ManagerController">
     <children>
-        <Label layoutX="62.0" layoutY="37.0" text="Welcome Manager">
+        <Label layoutX="191.0" layoutY="48.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="MANAGER'S PAGE">
             <font>
                 <Font size="57.0" />
             </font>
         </Label>
-        <Button fx:id="clientsPageButton" onAction="#goToClientsPage" layoutX="62.0" layoutY="185.0" mnemonicParsing="false" text="View Clients" />
-        <Button fx:id="demandsPageButton" onAction="#goToDemandsPage" layoutX="235.0" layoutY="185.0" mnemonicParsing="false" text="View Demands" />
-        <Button fx:id="stockPageButton" layoutX="442.0" layoutY="185.0" mnemonicParsing="false" onAction="#goToStockPage" text="View Stock" />
-        <Button fx:id="logoutButton" onAction="#logout" layoutX="456.0" layoutY="334.0" mnemonicParsing="false" text="Logout" />
+        <Button fx:id="clientsPageButton" layoutX="240.0" layoutY="249.0" mnemonicParsing="false" onAction="#goToClientsPage" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Clients" />
+        <Button fx:id="demandsPageButton" layoutX="241.0" layoutY="301.0" mnemonicParsing="false" onAction="#goToDemandsPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Demands" />
+        <Button fx:id="stockPageButton" layoutX="241.0" layoutY="353.0" mnemonicParsing="false" onAction="#goToStockPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Stock" />
+        <Button fx:id="logoutButton" layoutX="241.0" layoutY="537.0" mnemonicParsing="false" onAction="#logout" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Logout" />
     </children>
 </AnchorPane>

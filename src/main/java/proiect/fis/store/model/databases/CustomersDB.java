@@ -3,7 +3,6 @@ package proiect.fis.store.model.databases;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import proiect.fis.store.model.Customer;
-import proiect.fis.store.model.Product;
 
 import java.sql.*;
 
@@ -41,12 +40,12 @@ public class CustomersDB {
             COLUMN_PASSWORD_STATUS + " = 1 WHERE " + COLUMN_USERNAME + "= ?";
 
     public static final String UPDATE_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_NAME + " = ?," +
-        COLUMN_EMAIL + " = ?," + COLUMN_ADDRESS + " = ?," + COLUMN_PHONE + " = ?" + " WHERE " + COLUMN_USERNAME +
+            COLUMN_EMAIL + " = ?," + COLUMN_ADDRESS + " = ?," + COLUMN_PHONE + " = ?" + " WHERE " + COLUMN_USERNAME +
             " = ?";
 
 
     private Connection connection;
-    private PreparedStatement insertCustomer ;
+    private PreparedStatement insertCustomer;
     private static CustomersDB instance = new CustomersDB();
 
     private CustomersDB() {
@@ -56,13 +55,13 @@ public class CustomersDB {
         return instance;
     }
 
-    public boolean open(){
-        try{
+    public boolean open() {
+        try {
             connection = DriverManager.getConnection(CONNECTION_STRING);
             Statement statement = connection.createStatement();
             statement.execute(CREATE_TABLE);
-            return true ;
-        }catch (SQLException e){
+            return true;
+        } catch (SQLException e) {
             //
             return false;
         }
@@ -91,7 +90,7 @@ public class CustomersDB {
             return false;
         } finally {
             try {
-                if(insertCustomer != null)
+                if (insertCustomer != null)
                     insertCustomer.close();
             } catch (SQLException e) {
                 System.out.println("Couldn't close the connection for this prepared statement " + e.getMessage());
@@ -142,45 +141,44 @@ public class CustomersDB {
         }
     }
 
-    public boolean updateCustomer(Customer customer){
+    public boolean updateCustomer(Customer customer) {
         String username = customer.getUsername();
         String name = customer.getName();
         String email = customer.getEmail();
         String phoneNumber = customer.getPhone();
         String address = customer.getAddress();
 
-        try(PreparedStatement updateCustomer = connection.prepareStatement(UPDATE_CUSTOMER)){
-            updateCustomer.setString(1,name);
-            updateCustomer.setString(2,email);
-            updateCustomer.setString(3,address);
-            updateCustomer.setString(4,phoneNumber);
-            updateCustomer.setString(5,username);
+        try (PreparedStatement updateCustomer = connection.prepareStatement(UPDATE_CUSTOMER)) {
+            updateCustomer.setString(1, name);
+            updateCustomer.setString(2, email);
+            updateCustomer.setString(3, address);
+            updateCustomer.setString(4, phoneNumber);
+            updateCustomer.setString(5, username);
             return updateCustomer.executeUpdate() > 0;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             //
             return false;
         }
     }
 
 
-
-
-    public boolean close(){
-        try{
-            if(connection != null)
+    public boolean close() {
+        try {
+            if (connection != null)
                 connection.close();
-            return true ;
-        }catch (SQLException e){
+            return true;
+        } catch (SQLException e) {
             //
             return false;
         }
     }
+
     public ObservableList<Customer> getCustomers() {
         ObservableList<Customer> customers = FXCollections.observableArrayList();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + TABLE_NAME);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()) {
+            while (resultSet.next()) {
                 String name = resultSet.getString(2);
                 String username = resultSet.getString(1);
                 String email = resultSet.getString(5);
@@ -189,8 +187,8 @@ public class CustomersDB {
                 Customer customer = new Customer(username, name, email, phoneNumber, address);
                 customers.add(customer);
             }
-            return  customers;
-        }catch (SQLException e) {
+            return customers;
+        } catch (SQLException e) {
             return null;
         }
     }

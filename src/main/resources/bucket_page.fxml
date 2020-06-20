@@ -1,34 +1,32 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="555.0" prefWidth="825.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.BucketController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.BucketController">
 
-    <TableView fx:id="myTable" layoutX="33.0" layoutY="23.0" prefHeight="448.0" prefWidth="345.0">
+    <TableView fx:id="myTable" layoutX="27.0" layoutY="82.0" prefHeight="458.0" prefWidth="349.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" stylesheets="@tableviewCSS.css">
         <columns>
-            <TableColumn fx:id="nameColumn" prefWidth="122" text="Name" />
-            <TableColumn fx:id="priceColumn" prefWidth="122" text="Price" />
-            <TableColumn fx:id="quantityColumn" prefWidth="100" text="Quantity" />
+            <TableColumn fx:id="nameColumn" prefWidth="122" style="-fx-text-fill: #B670D2;" text="Name" />
+            <TableColumn fx:id="priceColumn" prefWidth="122" style="-fx-text-fill: #B670D2;" text="Price" />
+            <TableColumn fx:id="quantityColumn" prefWidth="100" style="-fx-text-fill: #B670D2;" text="Quantity" />
         </columns>
     </TableView>
 
-    <Button fx:id="placeOrderButton" layoutX="515.0" layoutY="96.0" mnemonicParsing="false" onAction="#placeOrder" text="Place order" />
+    <Button fx:id="placeOrderButton" layoutX="455.0" layoutY="408.0" mnemonicParsing="false" onAction="#placeOrder" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Place order" />
 
-    <Label fx:id="quantitySize" layoutX="621.0" layoutY="257.0" prefHeight="21.0" prefWidth="0.0" text="1" />
-    <Label layoutX="504.0" layoutY="257.0" text="Set quantity:" />
+    <Label fx:id="quantitySize" layoutX="584.0" layoutY="182.0" prefHeight="21.0" prefWidth="0.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="1" />
+    <Label layoutX="458.0" layoutY="182.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Set quantity:" />
 
 
-    <Button fx:id="plusButton" layoutX="610.0" layoutY="216.0" mnemonicParsing="false" onAction="#changeQuantity" text="+" />
+    <Button fx:id="plusButton" layoutX="574.0" layoutY="137.0" mnemonicParsing="false" onAction="#changeQuantity" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="+" />
 
-    <Button fx:id="minusButton" layoutX="613.0" layoutY="285.0" mnemonicParsing="false" onAction="#changeQuantity" text="-" />
+    <Button fx:id="minusButton" layoutX="576.0" layoutY="216.0" mnemonicParsing="false" onAction="#changeQuantity" prefHeight="9.0" prefWidth="23.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="-" />
 
-    <Button fx:id="saveButton" layoutX="697.0" layoutY="252.0" mnemonicParsing="false" onAction="#saveQuantity" text="Save " />
-    <Button fx:id="deleteButton" layoutX="665.0" layoutY="301.0" mnemonicParsing="false" onAction="#deleteProduct" text="Delete Product" />
+    <Button fx:id="saveButton" layoutX="453.0" layoutY="292.0" mnemonicParsing="false" onAction="#saveQuantity" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Save " />
+    <Button fx:id="deleteButton" layoutX="455.0" layoutY="364.0" mnemonicParsing="false" onAction="#deleteProduct" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Delete Product" />
 
-    <Button fx:id="backToMainButton" layoutX="653.0" layoutY="476.0" mnemonicParsing="false" onAction="#backToMain" text="Back to Main" />
+    <Button fx:id="backToMainButton" layoutX="451.0" layoutY="502.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back to Main" />
+   <Label layoutX="234.0" layoutY="14.0" prefHeight="54.0" prefWidth="415.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="YOUR BUCKET" />
 
 </AnchorPane>
