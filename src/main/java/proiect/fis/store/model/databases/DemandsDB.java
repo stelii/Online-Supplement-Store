@@ -41,13 +41,15 @@ public class DemandsDB {
         }
     }
 
-    public void closeConnection() {
+    public boolean closeConnection() {
         try {
             if (connection != null)
                 connection.close();
 
+            return true ;
+
         } catch (SQLException e) {
-            //
+            return false;
         }
     }
 
@@ -70,15 +72,16 @@ public class DemandsDB {
         }
     }
 
-    public void deleteDemand(Product product) {
+    public boolean deleteDemand(Product product) {
         String name = product.getName();
         try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM " + TABLE_NAME +
                     " WHERE name = ?");
             preparedStatement.setString(1, name);
-            preparedStatement.executeUpdate();
+            int res = preparedStatement.executeUpdate();
+            return res > 0 ;
         } catch (SQLException e) {
-            return;
+            return false ;
         }
     }
 
