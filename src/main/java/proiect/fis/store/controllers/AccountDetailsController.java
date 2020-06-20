@@ -18,7 +18,7 @@ import java.io.IOException;
 public class AccountDetailsController {
 
 
-    private Customer customer ;
+    private Customer customer;
 
     @FXML
     private TextField username;
@@ -32,12 +32,11 @@ public class AccountDetailsController {
     private TextField address;
 
     @FXML
-    private Button saveChangesButton ;
+    private Button saveChangesButton;
     @FXML
     private Button backToMainButton;
 
-    public void initialize(){
-        System.out.println(customer.getAddress());
+    public void initialize() {
         username.setText(customer.getUsername());
         name.setText(customer.getName());
         email.setText(customer.getEmail());
@@ -49,43 +48,43 @@ public class AccountDetailsController {
     }
 
     @FXML
-    public void backToMain(){
+    public void backToMain() {
         Stage stage = (Stage) backToMainButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {
-                if(param == CustomerController.class){
+                if (param == CustomerController.class) {
                     CustomerController controller = new CustomerController();
                     controller.setCustomer(customer);
                     return controller;
-                }else{
-                    try{
+                } else {
+                    try {
                         return param.newInstance();
-                    }catch (Exception e){
+                    } catch (Exception e) {
                         return new RuntimeException(e);
                     }
                 }
             }
         });
 
-        try{
+        try {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
-        }catch (IOException e){
+        } catch (IOException e) {
             //
         }
     }
 
 
-    public void setCustomer(Customer customer){
-        this.customer = customer ;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
     @FXML
-    public void saveChanges(){
+    public void saveChanges() {
         String customerUsername = username.getText();
         String customerName = name.getText();
         String customerPhoneNumber = phoneNumber.getText();
@@ -93,8 +92,8 @@ public class AccountDetailsController {
         String customerEmail = email.getText();
 
         CustomersDB customersDB = CustomersDB.getInstance();
-        Customer customer = new Customer(customerUsername,customerName,customerEmail,customerPhoneNumber,customerAddress);
-        if(customersDB.updateCustomer(customer)){
+        Customer customer = new Customer(customerUsername, customerName, customerEmail, customerPhoneNumber, customerAddress);
+        if (customersDB.updateCustomer(customer)) {
             this.customer.setName(customerName);
             this.customer.setEmail(customerEmail);
             this.customer.setAddress(customerAddress);
@@ -104,7 +103,7 @@ public class AccountDetailsController {
             if (alert.getResult() == ButtonType.OK) {
                 alert.close();
             }
-            return ;
+            return;
         }
 
         Alert alert = new Alert(Alert.AlertType.WARNING, "The changes couldn't be saved", ButtonType.OK);
@@ -117,7 +116,7 @@ public class AccountDetailsController {
 
 
     @FXML
-    private void setButtonProperties(){
+    private void setButtonProperties() {
         String customerName = name.getText();
         boolean isDisabled = customerName.isEmpty() || customerName.trim().isEmpty();
         saveChangesButton.setDisable(isDisabled);

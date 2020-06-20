@@ -10,11 +10,22 @@ import proiect.fis.store.model.databases.*;
 import java.sql.SQLException;
 
 public class Main extends Application {
+    CustomersDB customersDB = CustomersDB.getInstance();
+    SupplierDB supplierDB = SupplierDB.getInstance();
+    DemandsDB demandsDB = DemandsDB.getInstance();
+    OrdersDB ordersDB = OrdersDB.getInstance();
+    StockDB stockDB = StockDB.getInstance();
 
     @Override
     public void init() throws Exception {
         openDatabases();
         super.init();
+    }
+
+    @Override
+    public void stop() throws Exception {
+        closeDatabases();
+        super.stop();
     }
 
     @Override
@@ -26,16 +37,19 @@ public class Main extends Application {
     }
 
     private void openDatabases() {
-        CustomersDB customersDB = CustomersDB.getInstance();
         customersDB.open();
-        SupplierDB supplierDB = SupplierDB.getInstance();
         supplierDB.openConnection();
-        DemandsDB demandsDB = DemandsDB.getInstance();
         demandsDB.openConnection();
-        OrdersDB ordersDB = OrdersDB.getInstance();
         ordersDB.open();
-        StockDB stockDB = StockDB.getInstance();
         stockDB.openConnection();
+    }
+
+    private void closeDatabases(){
+        customersDB.close();
+        supplierDB.closeConnection();
+        demandsDB.closeConnection();
+        ordersDB.close();
+        stockDB.closeConnection();
     }
 
 

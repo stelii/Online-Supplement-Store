@@ -24,38 +24,39 @@ public class ChangePassController {
     @FXML
     private PasswordField passwordInput;
 
-    private Customer customer ;
+    private Customer customer;
     private Supplier supplier;
 
-    public void initialize(){
+    public void initialize() {
         backToMainPage.setDisable(true);
     }
 
-    public void setSupplier(Supplier supplier){
+    public void setSupplier(Supplier supplier) {
         this.supplier = supplier;
     }
-    public void setCustomer(Customer customer){
+
+    public void setCustomer(Customer customer) {
         this.customer = customer;
     }
 
 
     @FXML
     public void switchToMainPage() {
-        if(customer != null){
+        if (customer != null) {
             try {
                 Stage stage = (Stage) backToMainPage.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/customer_page.fxml"));
                 loader.setControllerFactory(new Callback<Class<?>, Object>() {
                     @Override
                     public Object call(Class<?> param) {
-                        if(param == CustomerController.class){
+                        if (param == CustomerController.class) {
                             CustomerController controller = new CustomerController();
                             controller.setCustomer(customer);
                             return controller;
-                        }else{
-                            try{
+                        } else {
+                            try {
                                 return param.newInstance();
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 return new RuntimeException(e);
                             }
                         }
@@ -68,7 +69,7 @@ public class ChangePassController {
             } catch (IOException e) {
 
             }
-        }else{
+        } else {
             try {
                 Stage stage = (Stage) backToMainPage.getScene().getWindow();
                 FXMLLoader loader = new FXMLLoader(getClass().getResource("/supplier_page.fxml"));
@@ -83,18 +84,18 @@ public class ChangePassController {
 
     }
 
-    public boolean changePassword(){
+    public boolean changePassword() {
         String username;
         String password = passwordInput.getText();
         passwordInput.clear();
 
         String hashedPassword = HashPassword.encrypt(password);
 
-        if(customer != null){
+        if (customer != null) {
             username = customer.getUsername();
             CustomersDB customersDB = CustomersDB.getInstance();
 
-            if(customersDB.updatePassword(username,hashedPassword)){
+            if (customersDB.updatePassword(username, hashedPassword)) {
                 backToMainPage.setDisable(false);
                 return true;
             }
@@ -103,12 +104,12 @@ public class ChangePassController {
         }
         username = supplier.getUsername();
         SupplierDB supplierDB = SupplierDB.getInstance();
-        if(supplierDB.updatePassword(username,hashedPassword)){
+        if (supplierDB.updatePassword(username, hashedPassword)) {
             backToMainPage.setDisable(false);
-            return true ;
+            return true;
         }
 
-        return false ;
+        return false;
     }
 
 }

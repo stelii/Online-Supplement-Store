@@ -4,6 +4,7 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.Order;
+import proiect.fis.store.model.Product;
 
 import java.sql.*;
 
@@ -24,7 +25,13 @@ public class OrdersDB {
             COLUMN_DELIVERY_STATUS + " TEXT," + COLUMN_CUSTOMER_NAME + " TEXT" +
             ")";
 
-    public static final String INSERT_PRODUCT = "INSERT INTO " + TABLE_NAME + " VALUES (?,?,?)";
+    public static final String ADD_QUANTITY = "UPDATE " +
+            TABLE_NAME + " SET quantity = quantity + ? WHERE name = ?";
+
+    public static final String INSERT_PRODUCT = "INSERT INTO " + TABLE_NAME + " VALUES (?,?,?,?,?)";
+    public static final String SEARCH_PRODUCT = "SELECT * FROM " + TABLE_NAME + " WHERE name = ?";
+
+
     private Connection connection;
 
     private static OrdersDB instance = new OrdersDB();
@@ -59,7 +66,7 @@ public class OrdersDB {
         }
     }
 
-    public boolean add(Order order){
+    public boolean add(Order order) {
         String username = order.getUsername();
         String productName = order.getName();
         double price = order.getPrice();
@@ -80,6 +87,39 @@ public class OrdersDB {
             return false;
         }
     }
+
+    public boolean updateOrder(Order order){
+        String name = order.getName();
+        int quantity = order.getQuantity();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(ADD_QUANTITY)){
+            preparedStatement.setInt(1,quantity);
+            preparedStatement.setString(2,name);
+            int rez = preparedStatement.executeUpdate();
+            return rez > 0 ;
+        }catch (SQLException e){
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public Order getOrder(Order order){
+        String name = order.getName();
+
+        try(PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_PRODUCT)){
+            preparedStatement.setString(1,name);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            if(resultSet.next()){
+                return order;
+            }
+            return null;
+        }catch (SQLException e){
+            return null ;
+        }
+    }
+
+
+
 
     public ObservableList<Order> getOrders(Customer customer){
         String username = customer.getUsername();
@@ -104,4 +144,6 @@ public class OrdersDB {
             return null ;
         }
     }
+
+
 }

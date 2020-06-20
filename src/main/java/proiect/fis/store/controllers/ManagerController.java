@@ -40,9 +40,11 @@ public class ManagerController {
             return false;
         }
     }
+
     public void setData(ObservableList<Product> demands) {
         this.demandsList = demands;
     }
+
     @FXML
     public boolean goToClientsPage() {
         try {
@@ -51,7 +53,6 @@ public class ManagerController {
             Parent cp = loader.load();
             Scene scene = new Scene(cp);
             stage.setScene(scene);
-            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("View Clients");
             stage.show();
             return true;
@@ -63,48 +64,19 @@ public class ManagerController {
 
     @FXML
     public boolean goToDemandsPage() {
-//        Stage stage = (Stage)viewBucketButton.getScene().getWindow();
-//        FXMLLoader loader = new FXMLLoader(getClass().getResource("/bucket_page.fxml"));
-//        loader.setControllerFactory(new Callback<Class<?>, Object>() {
-//            @Override
-//            public Object call(Class<?> param) {
-//                if(param == BucketController.class){
-//                    BucketController controller = new BucketController();
-//                    controller.setData(customer,bucket);
-//                    return controller;
-//                }else{
-//                    try{
-//                        return param.newInstance();
-//                    }catch (Exception e){
-//                        throw new RuntimeException(e);
-//                    }
-//                }
-//            }
-//        });
-//        try{
-//            Parent root = loader.load();
-//            Scene scene = new Scene(root);
-       // scene.getStylesheets().add("/tableviewCSS.css");
-//            stage.setScene(scene);
-//            stage.show();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-//
-//    }
-        Stage stage = (Stage)demandsPageButton.getScene().getWindow();
+        Stage stage = (Stage) demandsPageButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/demands_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {
-                if(param == DemandsPageController.class) {
+                if (param == DemandsPageController.class) {
                     DemandsPageController controller = new DemandsPageController();
                     controller.setData(demandsList);
                     return controller;
-                }else{
+                } else {
                     try {
                         return param.newInstance();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         throw new RuntimeException(e);
                     }
                 }
@@ -114,7 +86,6 @@ public class ManagerController {
             Parent dp = loader.load();
             Scene scene = new Scene(dp);
             stage.setScene(scene);
-            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("View Demands");
             stage.show();
             return true;
@@ -126,32 +97,20 @@ public class ManagerController {
 
     @FXML
     public boolean goToStockPage() {
-//        try {
-//            Stage stage = (Stage) stockPageButton.getScene().getWindow();
-//            FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock_page.fxml"));
-//            Parent viewStock = loader.load();
-//            Scene viewStockScene = new Scene(viewStock);
-//            stage.setScene(viewStockScene);
-//            stage.setTitle("View Stock");
-//            stage.show();
-//            return true;
-//        } catch (IOException e) {
-//            System.out.println("Error");
-//            return false;
-//        }
+
         Stage stage = (Stage) stockPageButton.getScene().getWindow();
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/stock_page.fxml"));
         loader.setControllerFactory(new Callback<Class<?>, Object>() {
             @Override
             public Object call(Class<?> param) {
-                if(param == StockPageController.class) {
+                if (param == StockPageController.class) {
                     StockPageController controller = new StockPageController();
                     controller.setData(demandsList);
                     return controller;
-                }else {
-                    try{
+                } else {
+                    try {
                         return param.newInstance();
-                    }catch (Exception e) {
+                    } catch (Exception e) {
                         throw new RuntimeException();
                     }
                 }
@@ -161,12 +120,11 @@ public class ManagerController {
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             stage.setScene(scene);
-            scene.getStylesheets().add("/tableviewCSS.css");
             stage.setTitle("Stock Page");
             stage.show();
             return true;
-        }catch (IOException e) {
-            System.out.println(e.getStackTrace());
+        } catch (IOException e) {
+            e.printStackTrace();
             return false;
         }
 

@@ -15,7 +15,7 @@ public class DemandsDB {
     public static final String SEARCH_PRODUCT = "SELECT *" + " FROM " + TABLE_NAME + " WHERE " +
             "name =" + "?";
     public static final String UPDATE_QUANTITY = "UPDATE " + TABLE_NAME + " SET " + "quantity" + " = quantity + ? " + "WHERE " + "name " + "= ?";
-//    public static final String CHANGE_PASSWOWRD_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_PASSWORD + " = ?," +
+    //    public static final String CHANGE_PASSWOWRD_CUSTOMER = "UPDATE " + TABLE_NAME + " SET " + COLUMN_PASSWORD + " = ?," +
 //            COLUMN_PASSWORD_STATUS + " = 1 WHERE " + COLUMN_USERNAME + "= ?";
     private Connection connection;
 
@@ -43,7 +43,7 @@ public class DemandsDB {
 
     public void closeConnection() {
         try {
-            if(connection != null)
+            if (connection != null)
                 connection.close();
 
         } catch (SQLException e) {
@@ -51,77 +51,79 @@ public class DemandsDB {
         }
     }
 
-    public ObservableList<Product> getDemands(){
+    public ObservableList<Product> getDemands() {
         ObservableList<Product> products = FXCollections.observableArrayList();
-        try{
-            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + TABLE_NAME );
+        try {
+            PreparedStatement preparedStatement = connection.prepareStatement("SELECT * FROM " + TABLE_NAME);
             ResultSet resultSet = preparedStatement.executeQuery();
-            while(resultSet.next()){
+            while (resultSet.next()) {
                 String name = resultSet.getString(1);
                 double price = resultSet.getDouble(2);
                 int quantity = resultSet.getInt(3);
-                Product product = new Product(name,price,quantity);
+                Product product = new Product(name, price, quantity);
                 products.add(product);
             }
             return products;
-        }catch (SQLException e){
+        } catch (SQLException e) {
             //
-            return null ;
+            return null;
         }
     }
 
-    public void deleteDemand(Product product){
+    public void deleteDemand(Product product) {
         String name = product.getName();
-        try{
+        try {
             PreparedStatement preparedStatement = connection.prepareStatement("DELETE FROM " + TABLE_NAME +
                     " WHERE name = ?");
-            preparedStatement.setString(1,name);
+            preparedStatement.setString(1, name);
             preparedStatement.executeUpdate();
-        }catch (SQLException e){
-            return ;
+        } catch (SQLException e) {
+            return;
         }
     }
 
     public boolean addDemand(Product product) {
-        if(searchProduct(product)) {
+        if (searchProduct(product)) {
             return updateProductQuantity(product);
         }
         String productName = product.getName();
         double productPrice = product.getPrice();
         int productQuantity = product.getQuantity();
-        try(PreparedStatement preparedStatement = connection.prepareStatement(ADD_DEMAND)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(ADD_DEMAND)) {
             preparedStatement.setString(1, productName);
             preparedStatement.setDouble(2, productPrice);
             preparedStatement.setInt(3, productQuantity);
             int flag = preparedStatement.executeUpdate();
             return flag > 0;
 
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error");
             return false;
         }
     }
+
     public boolean searchProduct(Product product) {
-        try(PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_PRODUCT)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(SEARCH_PRODUCT)) {
             preparedStatement.setString(1, product.getName());
             ResultSet resultSet = preparedStatement.executeQuery();
             System.out.println(resultSet.getString("name"));
-            if(resultSet.next()) {
+            if (resultSet.next()) {
                 return true;
             }
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             //System.out.println("Error searchProduct");
             return false;
         }
         return false;
     }
+
     public boolean updateProductQuantity(Product product) {
-        try(PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUANTITY)) {
+        try (PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_QUANTITY)) {
             preparedStatement.setInt(1, product.getQuantity());
             preparedStatement.setString(2, product.getName());
             int flag = preparedStatement.executeUpdate();
             return flag > 0;
-        }catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("Error updateProductQuantity");
             return false;
         }
