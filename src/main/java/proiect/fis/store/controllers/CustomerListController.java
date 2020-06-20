@@ -13,7 +13,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import proiect.fis.store.model.Customer;
-import proiect.fis.store.model.Product;
 import proiect.fis.store.model.databases.CustomersDB;
 
 import java.io.IOException;
@@ -41,10 +40,11 @@ public class CustomerListController {
         CustomersDB db = CustomersDB.getInstance();
         return db.getCustomers();
     }
+
     @FXML
     public boolean goToManagerPage() {
         try {
-            Stage stage = (Stage)backToMP.getScene().getWindow();
+            Stage stage = (Stage) backToMP.getScene().getWindow();
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
             Parent managerPage = loader.load();
             Scene ManagerPage = new Scene(managerPage);
@@ -57,12 +57,14 @@ public class CustomerListController {
             return false;
         }
     }
+
     private FilteredList<Customer> filteredList = new FilteredList<>(getCustomerList(), new Predicate<Customer>() {
         @Override
         public boolean test(Customer customer) {
             return true;
         }
     });
+
     public void initialize() {
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
         usernameColumn.setCellValueFactory(new PropertyValueFactory<>("Username"));
@@ -71,6 +73,7 @@ public class CustomerListController {
         addressColumn.setCellValueFactory(new PropertyValueFactory<>("Address"));
         customerTable.setItems(filteredList);
     }
+
     public void searchCustomer() {
         filteredList.setPredicate(new Predicate<Customer>() {
             @Override

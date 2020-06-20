@@ -27,7 +27,7 @@ public class LoginController {
     @FXML
     private CheckBox checkButton;
 
-    public void initialize(){
+    public void initialize() {
         loginButton.setDisable(true);
     }
 
@@ -46,7 +46,7 @@ public class LoginController {
     }
 
     @FXML
-    public void setButtonProperties(){
+    public void setButtonProperties() {
         String username = usernameInput.getText().trim();
         String password = passwordInput.getText().trim();
 
@@ -63,17 +63,17 @@ public class LoginController {
         usernameInput.clear();
         passwordInput.clear();
 
-        if(username.equals("manager") && password.equals("passwordManager")) {
+        if (username.equals("manager") && password.equals("passwordManager")) {
             return logInManager();
         }
 
-        if(checkButton.isSelected()){
+        if (checkButton.isSelected()) {
             SupplierDB supplierDB = SupplierDB.getInstance();
-           Supplier supplierFound = supplierDB.searchSupplier(username,hashedPassword);
+            Supplier supplierFound = supplierDB.searchSupplier(username, hashedPassword);
 
-           if(supplierFound != null)
-               return logInSupplier(supplierFound);
-           }
+            if (supplierFound != null)
+                return logInSupplier(supplierFound);
+        }
 
 
         CustomersDB customersDB = CustomersDB.getInstance();
@@ -91,20 +91,21 @@ public class LoginController {
     }
 
 
-    private boolean logInManager(){
-            try{
-                Stage stage = (Stage) loginButton.getScene().getWindow();
-                FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
-                Parent root = loader.load();
-                Scene scene = new Scene(root);
-                stage.setScene(scene);
-                stage.show();
-                return true ;
-            }catch (IOException e){
-                return false;
-            }
+    private boolean logInManager() {
+        try {
+            Stage stage = (Stage) loginButton.getScene().getWindow();
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/manager_page.fxml"));
+            Parent root = loader.load();
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.show();
+            return true;
+        } catch (IOException e) {
+            return false;
         }
-    private boolean logInSupplier(Supplier supplierFound){
+    }
+
+    private boolean logInSupplier(Supplier supplierFound) {
         if (supplierFound.getPassword_changed() != 0) {
             try {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -112,14 +113,14 @@ public class LoginController {
                 loader.setControllerFactory(new Callback<Class<?>, Object>() {
                     @Override
                     public Object call(Class<?> param) {
-                        if(param == SupplierController.class){
+                        if (param == SupplierController.class) {
                             SupplierController supplierController = new SupplierController();
                             supplierController.setSupplier(supplierFound);
                             return supplierController;
-                        }else{
-                            try{
+                        } else {
+                            try {
                                 return param.newInstance();
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
                         }
@@ -143,14 +144,14 @@ public class LoginController {
             loader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
                 public Object call(Class<?> param) {
-                    if(param == ChangePassController.class){
+                    if (param == ChangePassController.class) {
                         ChangePassController changePassController = new ChangePassController();
                         changePassController.setSupplier(supplierFound);
                         return changePassController;
-                    }else{
-                        try{
+                    } else {
+                        try {
                             return param.newInstance();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
                     }
@@ -166,7 +167,8 @@ public class LoginController {
             return false;
         }
     }
-    private boolean logInCustomer(Customer customerFound){
+
+    private boolean logInCustomer(Customer customerFound) {
         if (customerFound.getPassword_changed() != 0) {
             try {
                 Stage stage = (Stage) loginButton.getScene().getWindow();
@@ -174,14 +176,14 @@ public class LoginController {
                 loader.setControllerFactory(new Callback<Class<?>, Object>() {
                     @Override
                     public Object call(Class<?> param) {
-                        if(param == CustomerController.class){
+                        if (param == CustomerController.class) {
                             CustomerController customerController = new CustomerController();
                             customerController.setCustomer(customerFound);
                             return customerController;
-                        }else{
-                            try{
+                        } else {
+                            try {
                                 return param.newInstance();
-                            }catch (Exception e){
+                            } catch (Exception e) {
                                 throw new RuntimeException(e);
                             }
                         }
@@ -204,14 +206,14 @@ public class LoginController {
             loader.setControllerFactory(new Callback<Class<?>, Object>() {
                 @Override
                 public Object call(Class<?> param) {
-                    if(param == ChangePassController.class){
+                    if (param == ChangePassController.class) {
                         ChangePassController changePassController = new ChangePassController();
                         changePassController.setCustomer(customerFound);
                         return changePassController;
-                    }else{
-                        try{
+                    } else {
+                        try {
                             return param.newInstance();
-                        }catch (Exception e){
+                        } catch (Exception e) {
                             throw new RuntimeException(e);
                         }
                     }

@@ -1,6 +1,5 @@
 package proiect.fis.store.model.databases;
 
-import proiect.fis.store.model.Customer;
 import proiect.fis.store.model.Supplier;
 
 import java.sql.*;
@@ -33,29 +32,31 @@ public class SupplierDB {
             COLUMN_PASSWORD_STATUS + " = 1 WHERE " + COLUMN_USERNAME + "= ?";
 
     private Connection connection;
-    private PreparedStatement insertSupplier ;
+    private PreparedStatement insertSupplier;
 
     private static SupplierDB instance = new SupplierDB();
-    private SupplierDB() {}
+
+    private SupplierDB() {
+    }
+
     public static SupplierDB getInstance() {
         return instance;
     }
 
     public boolean openConnection() {
 
-        try{
+        try {
             connection = DriverManager.getConnection(CONNECTION_STRING);
             Statement statement = connection.createStatement();
             statement.execute(CREATE_TABLE);
             return true;
-        }
-        catch (SQLException e) {
+        } catch (SQLException e) {
             System.out.println("create table error");
             return false;
         }
     }
 
-    public boolean add(String username,String name,String password){
+    public boolean add(String username, String name, String password) {
         try {
             insertSupplier = connection.prepareStatement(INSERT_SUPPLIER);
             insertSupplier.setString(1, username);
@@ -69,7 +70,7 @@ public class SupplierDB {
             return false;
         } finally {
             try {
-                if(insertSupplier != null)
+                if (insertSupplier != null)
                     insertSupplier.close();
             } catch (SQLException e) {
                 System.out.println("Couldn't close the connection for this prepared statement " + e.getMessage());
@@ -115,16 +116,14 @@ public class SupplierDB {
     }
 
 
-
-    public boolean closeConnection () {
+    public boolean closeConnection() {
         try {
-            if (connection!=null)
+            if (connection != null)
                 connection.close();
 
-            return true ;
-        }
-        catch (SQLException e) {
-            return false ;
+            return true;
+        } catch (SQLException e) {
+            return false;
         }
     }
 }
