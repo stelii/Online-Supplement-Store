@@ -1,0 +1,91 @@
+.root {
+    -fx-background-color: #37084A;
+}
+
+
+.table-view{
+   -fx-background-color: transparent;
+   -fx-border-color: #B670D2;
+   -fx-text-fill: #B670D2;
+   -fx-border-radius: 20;
+}
+
+.table-view:focused{
+    -fx-background-color: transparent;
+}
+
+.table.view{
+    -fx-background-color: transparent;
+}
+
+.table.column {
+    -fx-text-fill: #B670D2;
+}
+
+.table-view .column-header-background{
+    -fx-background-color: linear-gradient(#37084A 0%, #B670D2 100%);
+}
+
+.table-view .column-header-background .label{
+    -fx-background-color: transparent;
+    -fx-text-fill: #B670D2;
+}
+
+.table-view .column-header {
+    -fx-background-color: transparent;
+}
+
+.table-row-cell:odd {
+	-fx-background-color: #37084A;
+	-fx-background-insets: 0, 0 0 1 0;
+	-fx-text-fill: #B670D2;
+	-fx-padding: 0.0em;
+}
+
+.table-row-cell:even{
+    -fx-background-color: #7C3897;
+    -fx-background-insets: 0, 0 0 1 0;
+    -fx-text-fill: #5F0E7F;
+    -fx-padding: 0.0em;
+}
+
+.button {
+    -fx-background-color: transparent;
+    -fx-border-color: #B670D2;
+    -fx-border-radius: 20;
+    -fx-text-fill: #B670D2;
+
+}
+
+.label {
+    -fx-text-fill: #B670D2;
+    -fx-font-size: 1.2em;
+}
+
+.text-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #B670D2;
+    -fx-background-insets: 0;
+    -fx-border-radius: 20;
+    -fx-text-inner-color: #B670D2;
+}
+
+.password-field {
+    -fx-background-color: transparent;
+    -fx-border-color: #B670D2;
+    -fx-background-insets: 0;
+    -fx-border-radius: 20;
+    -fx-text-inner-color: #B670D2;
+}
+
+.check-box {
+    -fx-text-fill: #B670D2;
+    -fx-font-size: 1.5em;
+    -fx-background-color: transparent;
+}
+
+.combo-box {
+    -fx-background-color: transparent;
+    -fx-border-color: #B670D2;
+    -fx-border-radius: 20;
+}

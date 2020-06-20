@@ -173,6 +173,7 @@ public class CustomerController {
             Parent root = loader.load();
             Scene scene = new Scene(root);
             stage.setScene(scene);
+            scene.getStylesheets().add("/tableviewCSS.css");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

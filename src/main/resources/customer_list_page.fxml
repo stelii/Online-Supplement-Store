@@ -3,18 +3,19 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.CustomerListController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.CustomerListController">
    <children>
-      <Button fx:id="backToMP" onAction="#goToManagerPage" layoutX="535.0" layoutY="355.0" mnemonicParsing="false" text="Back" />
-      <TableView fx:id="customerTable" layoutX="14.0" layoutY="36.0" prefHeight="200.0" prefWidth="500.0">
+      <Button fx:id="backToMP" layoutX="215.0" layoutY="543.0" mnemonicParsing="false" onAction="#goToManagerPage" prefHeight="31.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back" />
+      <TableView fx:id="customerTable" layoutX="100.0" layoutY="175.0" prefHeight="350.0" prefWidth="500.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" stylesheets="@tableviewCSS.css">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="100.0" text="Name" />
-          <TableColumn fx:id="usernameColumn" prefWidth="100.0" text="Username" />
-            <TableColumn fx:id="emailColumn" prefWidth="100.0" text="Email" />
-            <TableColumn fx:id="numberColumn" prefWidth="100.0" text="Phone Number" />
-            <TableColumn fx:id="addressColumn" prefWidth="100.0" text="Address" />
+          <TableColumn fx:id="nameColumn" prefWidth="100.0" style="-fx-text-fill: #B670D2;" text="Name" />
+          <TableColumn fx:id="usernameColumn" prefWidth="100.0" style="-fx-text-fill: #B670D2;" text="Username" />
+            <TableColumn fx:id="numberColumn" prefWidth="100.0" style="-fx-text-fill: #B670D2;" text="Phone Number" />
+            <TableColumn fx:id="addressColumn" prefWidth="100.0" style="-fx-text-fill: #B670D2;" text="Address" />
+            <TableColumn fx:id="emailColumn" prefWidth="100.0" style="-fx-text-fill: #B670D2;" text="Email" />
         </columns>
       </TableView>
-      <TextField fx:id="searchField" alignment="CENTER" layoutX="14.0" layoutY="252.0" onKeyReleased="#searchCustomer" prefHeight="31.0" prefWidth="136.0" promptText="Search here" />
+      <TextField fx:id="searchField" alignment="CENTER" layoutX="215.0" layoutY="118.0" onKeyReleased="#searchCustomer" prefHeight="31.0" prefWidth="270.0" promptText="Search here" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
+      <Label layoutX="211.0" layoutY="35.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="CUSTOMERS LIST" />
    </children>
 </AnchorPane>
