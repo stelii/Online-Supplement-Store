@@ -125,6 +125,7 @@ public class StockPageController {
                     }
                 }
             }
+            return;
         }
 
         Product product = productTable.getSelectionModel().getSelectedItem();

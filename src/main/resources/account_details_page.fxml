@@ -3,7 +3,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.AccountDetailsController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.AccountDetailsController">
 
     <children>
         <Label layoutX="159.0" layoutY="132.0" prefWidth="113.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Username :" />

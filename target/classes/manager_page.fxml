@@ -4,14 +4,14 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.ManagerController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.ManagerController">
     <children>
-        <Label layoutX="199.0" layoutY="45.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="Welcome Manager">
+        <Label layoutX="203.0" layoutY="47.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="MANAGER'S PAGE">
             <font>
                 <Font size="57.0" />
             </font>
         </Label>
-        <Button fx:id="clientsPageButton" layoutX="215.0" layoutY="242.0" mnemonicParsing="false" onAction="#goToClientsPage" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Clients" />
+        <Button fx:id="clientsPageButton" layoutX="214.0" layoutY="248.0" mnemonicParsing="false" onAction="#goToClientsPage" prefHeight="26.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Clients" />
         <Button fx:id="demandsPageButton" layoutX="215.0" layoutY="300.0" mnemonicParsing="false" onAction="#goToDemandsPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Demands" />
         <Button fx:id="stockPageButton" layoutX="215.0" layoutY="352.0" mnemonicParsing="false" onAction="#goToStockPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Stock" />
         <Button fx:id="logoutButton" layoutX="215.0" layoutY="536.0" mnemonicParsing="false" onAction="#logout" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Logout" />

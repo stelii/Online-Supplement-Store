@@ -3,17 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.RegisterController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.RegisterController">
 
     <children>
         <TextField fx:id="usernameInput" layoutX="240.0" layoutY="196.0" onKeyReleased="#setButtonProperties" prefWidth="270.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
         <TextField fx:id="nameInput" layoutX="240.0" layoutY="244.0" onKeyReleased="#setButtonProperties" prefWidth="270.0" promptText="Name" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
         <Button fx:id="registerButton" layoutX="240.0" layoutY="384.0" mnemonicParsing="false" onAction="#register" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Register" />
         <Button fx:id="toLoginBtn" layoutX="240.0" layoutY="546.0" mnemonicParsing="false" onAction="#switchToLogin" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back to Login" />
-        <Label layoutX="245.0" layoutY="478.0" prefHeight="54.0" prefWidth="260.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.5em;" text="The password will be generated!" />
-      <ComboBox fx:id="roleChoice" layoutX="240.0" layoutY="325.0" onMouseClicked="#setButtonProperties" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" />
-      <Label layoutX="142.0" layoutY="327.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Register as:" />
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="230.0" layoutY="62.0" prefHeight="54.0" prefWidth="290.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="REGISTER HERE:" />
+        <Label layoutX="245.0" layoutY="478.0" prefHeight="54.0" prefWidth="416.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.5em;" text="The password will be generated!" />
+      <ComboBox fx:id="roleChoice" layoutX="240.0" layoutY="325.0" onMouseClicked="#setButtonProperties" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" />
+      <Label layoutX="113.0" layoutY="327.0" style="-fx-text-fill: #B670D2; -fx-font-size: 1.2em;" text="Register as:" />
+      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="186.0" layoutY="66.0" prefHeight="54.0" prefWidth="378.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="REGISTER HERE:" />
     </children>
 
 </AnchorPane>

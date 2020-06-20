@@ -3,17 +3,17 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="650.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.DeliveryStatusController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.DeliveryStatusController">
     <children>
         <TableView fx:id="myTable" layoutX="155.0" layoutY="124.0" prefHeight="350.0" prefWidth="450.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" stylesheets="@tableviewCSS.css">
             <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="120.0" style="-fx-text-fill: #B670D2;" text="Name" />
                 <TableColumn fx:id="priceColumn" prefWidth="96.39996337890625" style="-fx-text-fill: #B670D2;" text="Price" />
                 <TableColumn fx:id="quantityColumn" prefWidth="120.39996337890625" style="-fx-text-fill: #B670D2;" text="Quantity" />
-                <TableColumn fx:id="statusColumn" prefWidth="110.800048828125" text="Status" />
+                <TableColumn fx:id="statusColumn" prefWidth="110.800048828125" style="-fx-text-fill: #B670D2;" text="Status" />
             </columns>
         </TableView>
-        <Button fx:id="backToMainButton" layoutX="226.0" layoutY="528.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back to Main" />
+        <Button fx:id="backToMainButton" layoutX="245.0" layoutY="528.0" mnemonicParsing="false" onAction="#backToMain" prefHeight="27.0" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back to Main" />
       <Label layoutX="218.0" layoutY="25.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="DELIVERY STATUS" />
 
 

@@ -3,22 +3,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane maxHeight="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="600.0" prefWidth="700.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.StockPageController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="650.0" minWidth="750.0" prefHeight="650.0" prefWidth="750.0" style="-fx-background-color: #37084A;" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="proiect.fis.store.controllers.StockPageController">
     <children>
-        <Button fx:id="backFromStock" layoutX="382.0" layoutY="592.0" mnemonicParsing="false" onAction="#backToManagerPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back" />
-        <TableView fx:id="productTable" layoutX="125.0" layoutY="138.0" prefHeight="350.0" prefWidth="450.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" stylesheets="@tableviewCSS.css">
+        <Button fx:id="backFromStock" layoutX="407.0" layoutY="590.0" mnemonicParsing="false" onAction="#backToManagerPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Back" />
+        <TableView fx:id="productTable" layoutX="150.0" layoutY="141.0" prefHeight="350.0" prefWidth="450.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20;" stylesheets="@tableviewCSS.css">
             <columns>
                 <TableColumn fx:id="nameColumn" prefWidth="157.0" style="-fx-text-fill: #B670D2;" text="Name" />
                 <TableColumn fx:id="priceColumn" prefWidth="134.19998168945312" style="-fx-text-fill: #B670D2;" text="Price" />
                 <TableColumn fx:id="quantityColumn" prefWidth="160.5999755859375" style="-fx-text-fill: #B670D2;" text="Quantity" />
             </columns>
         </TableView>
-        <TextField fx:id="filterField" layoutX="215.0" layoutY="98.0" onKeyReleased="#searchProduct" prefHeight="26.0" prefWidth="270.0" promptText="Search here" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
-      <Button fx:id="addToDemands" layoutX="382.0" layoutY="551.0" mnemonicParsing="false" onAction="#addToDemandsBucket" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Add to demands" />
-      <Button fx:id="goToDemandsPage" layoutX="380.0" layoutY="507.0" mnemonicParsing="false" onAction="#goToDemandsPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Demands" />
-      <TextField fx:id="productName" layoutX="48.0" layoutY="505.0" prefHeight="31.0" prefWidth="270.0" promptText="Product name" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2; -fx-text-inner-color: #B670D2;" />
-      <TextField fx:id="productPrice" layoutX="48.0" layoutY="549.0" prefHeight="31.0" prefWidth="270.0" promptText="Product price" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2; -fx-text-inner-color: #B670D2;" />
-      <TextField fx:id="productQuantity" layoutX="48.0" layoutY="590.0" prefHeight="31.0" prefWidth="270.0" promptText="Product quantity" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2; -fx-text-inner-color: #B670D2;" />
-      <Label layoutX="296.0" layoutY="14.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="STOCK" />
+        <TextField fx:id="filterField" layoutX="240.0" layoutY="102.0" onKeyReleased="#searchProduct" prefHeight="26.0" prefWidth="270.0" promptText="Search here" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-inner-color: #B670D2;" />
+      <Button fx:id="addToDemands" layoutX="407.0" layoutY="505.0" mnemonicParsing="false" onAction="#addToDemandsBucket" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="Add to demands" />
+      <Button fx:id="goToDemandsPage" layoutX="407.0" layoutY="549.0" mnemonicParsing="false" onAction="#goToDemandsPage" prefWidth="270.0" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2;" text="View Demands" />
+      <TextField fx:id="productName" layoutX="73.0" layoutY="503.0" prefHeight="31.0" prefWidth="270.0" promptText="Product name" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2; -fx-text-inner-color: #B670D2;" />
+      <TextField fx:id="productPrice" layoutX="73.0" layoutY="547.0" prefHeight="31.0" prefWidth="270.0" promptText="Product price" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2; -fx-text-inner-color: #B670D2;" />
+      <TextField fx:id="productQuantity" layoutX="73.0" layoutY="588.0" prefHeight="31.0" prefWidth="270.0" promptText="Product quantity" style="-fx-background-color: transparent; -fx-border-color: #B670D2; -fx-border-radius: 20; -fx-text-fill: #B670D2; -fx-text-inner-color: #B670D2;" />
+      <Label layoutX="321.0" layoutY="14.0" style="-fx-text-fill: #B670D2; -fx-font-size: 3em;" text="STOCK" />
     </children>
 </AnchorPane>

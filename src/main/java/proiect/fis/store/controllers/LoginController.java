@@ -63,7 +63,7 @@ public class LoginController {
         usernameInput.clear();
         passwordInput.clear();
 
-        if (username.equals("manager") && password.equals("passwordManager")) {
+        if (username.equals("manager") && password.equals("manager")) {
             return logInManager();
         }
 
@@ -129,6 +129,7 @@ public class LoginController {
                 Parent root = loader.load();
                 Scene scene = new Scene(root);
                 stage.setScene(scene);
+                scene.getStylesheets().add("/tableviewCSS.css");
                 stage.show();
                 return true;
             } catch (IOException e) {
