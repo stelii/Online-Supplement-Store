@@ -162,10 +162,6 @@ public class DemandsPageController {
         DemandsDB demandsDB = DemandsDB.getInstance();
         int res = 0;
         for(int i = 0; i < demandsToBeMade.size(); ++i) {
-//            String productName = demandsToBeMade.get(i).getName();
-//            int productQuantity = demandsToBeMade.get(i).getQuantity();
-//            double productPrice = demandsToBeMade.get(i).getPrice();
-//            Product product = new Product(productName, productPrice, productQuantity);
             demandsDB.addDemand(demandsToBeMade.get(i));
              res = 1;
         }

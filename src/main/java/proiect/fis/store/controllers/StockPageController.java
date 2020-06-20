@@ -135,7 +135,6 @@ public class StockPageController {
                 }
             }
             demandsBucket.add(product);
-            // System.out.println(product.getName());
         }
 
         clearInputs();

@@ -57,15 +57,6 @@ public class SupplierDB {
 
     public boolean add(String username,String name,String password){
         try {
-            try {
-                if (connection == null) {
-                    connection = DriverManager.getConnection(CONNECTION_STRING);
-                }
-            } catch (SQLException e) {
-                System.out.println("Error connecting to database " + e.getMessage());
-                e.printStackTrace();
-                return false;
-            }
             insertSupplier = connection.prepareStatement(INSERT_SUPPLIER);
             insertSupplier.setString(1, username);
             insertSupplier.setString(2, name);
@@ -125,13 +116,15 @@ public class SupplierDB {
 
 
 
-    public void closeConnection () {
+    public boolean closeConnection () {
         try {
             if (connection!=null)
                 connection.close();
+
+            return true ;
         }
         catch (SQLException e) {
-            //
+            return false ;
         }
     }
 }
