@@ -92,7 +92,7 @@ public class CustomerController {
     @FXML
     public void addToBucket() {
         Product product = myTable.getSelectionModel().getSelectedItem();
-        if(product == null){
+        if (product == null) {
             Alert alert = new Alert(Alert.AlertType.WARNING, "PLEASE SELECT A PRODUCT", ButtonType.OK);
             alert.showAndWait();
             if (alert.getResult() == ButtonType.OK) {
@@ -115,7 +115,7 @@ public class CustomerController {
                     searchProduct.updateQuantity(product.getQuantity());
                 break;
             }
-        }else{
+        } else {
             product.setQuantity(1);
             bucket.add(product);
         }
